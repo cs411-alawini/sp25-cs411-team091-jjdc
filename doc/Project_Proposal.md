@@ -1,13 +1,12 @@
-# Title:
+# Title: BalanceBites
 
 ## Project Summary
+Our project, BalanceBites, is a home for calorie counters who also want to track their nutrients with a little guidance. Our app is designed to make tracking calories and macronutrients (fats, carbohydrates, protein) easy while giving the user recommendations based on their deficiencies in said categories. If a user were lower in fats than proteins, we would recommend them to eat an item with a higher fat content, while if they had almost all their macronutrients, we would then focus on getting their calories up to their chosen level. Our app aims to gather nutritional information from common household foods and recipes, and give the user the choice of what to pick based on the recommended daily values of macronutrients. In this way, our app saves the user time in choosing the most balanced meal or food for their current calorie and macronutrient intake, helping them track their calories and macronutrients while also balancing their diet without the need for lengthy research. 
 
 ### Description
+Calorie counting and macronutrient tracking are both hard and complicated tasks that many people undertake to obtain a healthier lifestyle. We want to help those people by making their decisions easier and giving them a stress-free place to do it. Unfortunately, to get good diet information and recommendations, it can either be very costly in time or money, depending on if you go down the research rabbit-hole or pay a dietitian or nutritionist, both of which are very limited resources in today’s world. We want to help those people that are stuck on their dieting journey and need some help in balancing their diet while maintaining their chosen calorie level without wasting said time or money.
 
-The system will allow users to:
-- 
--
--
+Our aim is to give users a data-driven approach to solving this issue. We collect data on common foods and recipes for them, allow them to add their own or maintain a liked/favorited list of their most-eaten foods, and then show them the results of our findings based on what they need throughout their day. Essentially, the app tracks their calories and macronutrients, and gives them personalized recommendations about what food to eat given their deficiencies and the real-world data at hand. Subsequently, rather than searching for hours or paying a lot of money for the same or similar information, we can give them personal recommendations that are based solely on the nutritional data of common foods, such as those in most households, giving solid accessibility on top of convenience and speed.
   
 ### Good Creative Component
 To enhance user engagement and provide a richer experience, we propose incorporating an interactive visualization module as our creative component. This feature will include:
