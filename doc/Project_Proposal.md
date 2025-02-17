@@ -26,7 +26,7 @@ Here are the basic functions of our app:
 - The users can register an account in our app and set their daily calorie intake goals. They can also record the calories consumed each day for up to a week to examine their performance and share it with others.
 - We will provide a reference data set on the nutritional facts for different foods for the users to choose. Users can input their desired food with the nutrition information if the food is missing in our database. 
 - Recipes, which are based on a combination of different kinds of foods will also be provided and can be updated by the user as well. Different recipes will be recommended based on the goal set by the user. For example, foods that are rich in carbohydrates will likely be recommended to people who want high-calorie intake.
-- Visualization of the last week's calories and macros will be provided. The user will be able to click on total calorie performance (measured in how far they were from their goal), Then they can click each day and the app would give them custom information for that day such as their specific macros.
+- Visualization of the last week's calories and macros will be provided. The user will be able to click on total calorie performance (measured in how far they were from their goal). Then, they can click each day and the app would give them custom information for that day such as their specific macros.
 
 There are simple features like registering and setting up calorie goals and complex features such as recommending different recipes that meet the user’s calorie needs and visualizing the total calorie intake and other macros.
 
@@ -53,14 +53,13 @@ We will rely on real-world datasets with recipes and common foods to power our a
     - **Data Size:** 8789 different foods (cardinality), each with 77 kinds of nutrition (degree).
   
 ## Functionality Description
-  TODO (Remove when submitting)
 ### Basic Functions (CRUD & Search)
-  TODO (Remove when submitting)
+Users can create accounts, log in, update profiles, and delete accounts. The main feature of the website will be adding foods using the "add" button so that if a food is not found in the database, a user can add this food with their calories and nutrition. If the food is in the database already, the user can search for the food and view the macronutrients and calories of the food item. Additionally, users can update foods in case their nutrition or calorie information is wrong and can add recipes that use common foods and combines nutrition and calories. They may also look for publicly available recipes provided by other users by using our search feature. The user can also apply filters on their search in order to narrow down what they are looking for in a recipe. They may also save foods to a “liked list” for easy access in the future, save calories, fats, proteins, and carbohydrates for the current day for food search, and save nutrition and calorie data for one week at a time for comparison. 
 ### Advanced Function (Complex Feature)
-  TODO (Remove when submitting)
-  
+Users can view their weekly calories in an interactive graph which also shows a breakdown of their macronutrients when the user hovers over a day of the week. These macronutrients include the three major macronutrients (protein, fat, and carbohydrates). In this interactive graph, they can also view how close they are to their calorie goals for each day. Users can also share the macronutrients of a specific food item of their choosing with other users. 
+
 ## Low-Fidelity UI Mockup
-TODO (Remove when submitting)
+![Screenshot 2025-02-17 003310](https://github.com/user-attachments/assets/27422ec8-286c-4dc8-ab81-113c2644258e)
 
 ## Project Work Distribution
 - **Jake Van Anrooy (Primary Backend Developer):**
