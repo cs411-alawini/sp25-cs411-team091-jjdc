@@ -47,7 +47,7 @@ TODO
 
 ## Normalization - 3NF
 
-We will show our schema adheres to 3NF without any other normalization. 
+We will show our schema adheres to 3NF without any additional normalization. 
 
 First, for UserInfo, the only functional dependencies (FDs) are UserID to Password and UserID to Name, when separating the FDs that have singletons on the right-hand side (RHS). This is because UserID is the intended key of this entity. Thus, since UserID determines all the other attributes, it is a superkey for UserInfo. Therefore, UserInfo is in 3NF.
 
