@@ -1,31 +1,40 @@
 ```mermaid
 classDiagram
   class UserInfo {
-      +UserID/Email : VARCHAR
-      Password : VARCHAR
-      Name : VARCHAR
+      UserID [PK]
+      Password
+      Name
   }
   class Foods {
-      +FoodName : VARCHAR
-      Calories : INT
-      Fat : INT
-      Carbs : INT
-      Protein : INT
+      FoodName [PK]
+      Calories
+      Fat
+      Carbohydrates
+      Protein
   }
   class Recipes {
-      +RecipeID : INT
-      Ingredients : VARCHAR
-      Name : VARCHAR
-      UserID : VARCHAR
-      Public : BOOLEAN
+      RecipeID [PK]
+      Ingredients
+      Name
+      UserID
+      Public
   }
   class NutritionLog {
-      +UserID : VARCHAR
-      Time : DATETIME
-      Entry : VARCHAR
+      UserID [PK]
+      Time [PK]
+      RecipeID
   }
   class MealPlan {
-      +MealPlanID : INT
-      +UserID : VARCHAR
+      MealPlanID [PK]
+      UserID
+      Recipes
+      Name
+      Public
   }
+UserInfo "1..1" -- "1..10" MealPlan : UserMealPlans
+UserInfo "0..*" -- "0..*" NutritionLog : Logs
+UserInfo "0..1" -- "0..10" Recipes : UserRecipes
+NutritionLog "0..*" -- "0..*" MealPlan : MealPlanLogs
+MealPlan "0..*" -- "1..*" Recipes : MealPlanRecipes
+Recipes "0..*" -- "1..*" Foods : Ingredients
 ```
