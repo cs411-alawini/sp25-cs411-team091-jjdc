@@ -56,9 +56,9 @@ We have a grand total of five entities in our database, with their assumptions a
   
 - Recipes:
   
-- NutritionLog
+- NutritionLog:
   
-- MealPlan
+- MealPlan:
 
 # Relationships
 TODO
