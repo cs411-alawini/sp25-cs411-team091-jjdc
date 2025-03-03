@@ -2,6 +2,8 @@
 
 ## UML Diagram
 
+We have marked the primary keys with `[PK]` for clarity in our UML diagram below.
+
 ```mermaid
 classDiagram
   class UserInfo {
@@ -36,14 +38,44 @@ classDiagram
       Public
   }
 UserInfo "1..1" -- "1..10" MealPlan : UserMealPlans
-UserInfo "0..*" -- "0..*" NutritionLog : Logs
+UserInfo "1..1" -- "0..*" NutritionLog : Logs
 UserInfo "0..1" -- "0..10" Recipes : UserRecipes
-NutritionLog "0..*" -- "0..*" MealPlan : MealPlanLogs
+NutritionLog "0..*" -- "0..1" MealPlan : MealPlanLogs
 MealPlan "0..*" -- "1..*" Recipes : MealPlanRecipes
 Recipes "0..*" -- "1..*" Foods : Ingredients
 ```
 ## Assumptions and Description of Entities and Relationships
+
+# Entities
 TODO
+We have a grand total of five entities in our database, with their assumptions and descriptions laid out below.
+
+- UserInfo:
+  
+- Foods:
+  
+- Recipes:
+  
+- NutritionLog
+  
+- MealPlan
+
+# Relationships
+TODO
+We have a grand total of six relationships in our database, four of which are one-to-many/many-to-one and two of which are many-to-many. Their assumptions and descriptions are laid out below.
+
+- UserInfo - Recipes (One-to-Many):
+  
+- Recipes - Foods (Many-to-Many):
+
+- Recipes - MealPlan (Many-to-Many):
+
+- NutritionLog - UserInfo (Many-to-One):
+
+- NutritionLog - MealPlan (Many-to-One):
+
+- MealPlan - UserInfo (Many-to-One):
+
 
 ## Normalization - 3NF
 
@@ -69,18 +101,11 @@ We separate our logical design below where each bullet point holds information a
 - UserInfo(UserID: VARCHAR(255) [PK],
 Password: VARCHAR(255),
 Name: VARCHAR(255))
-
-- Logs(UserID: VARCHAR(255) [FK to UserInfo.UserID] [PK],
-			Time: DATETIME [FK to NutritionLog.Time]  [PK])
   
 - NutritionLog(UserID: VARCHAR(255) [PK],
 		Time: DATETIME [PK],
 		RecipeID: INT [FK to Recipes.RecipeID])
   
-- MealPlanLogs(UserID: VARCHAR(255) [FK to NutritionLog.UserID] [PK],
-			Time: DATETIME [FK to NutritionLog.Time] [PK],
-			MealPlanID: INT [FK to MealPlan.MealPlanID] [PK])
-
 - MealPlan(MealPlanID: INT [PK],
 		UserID: VARCHAR(255) [FK to UserInfo.UserID],
 		Recipes: VARCHAR(255),
