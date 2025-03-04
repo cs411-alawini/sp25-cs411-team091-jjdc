@@ -1,4 +1,6 @@
-# Data Definition Language (DDL) Commands
+# Database Implementation and Indexing
+
+## Data Definition Language (DDL) Commands
 TODO
 - CREATE TABLE UserInfo(UserID VARCHAR(255), Password VARCHAR(255), Name VARCHAR(255));
 
@@ -14,11 +16,11 @@ TODO
 
 - CREATE TABLE Foods(FoodNameVARCHAR(255), Calories INT, Fat INT, Carbohydrates INT, Protein INT);
 
-# Insertion Commands
+## Insertion Commands
 TODO
-# Advanced SQL Queries
+## Advanced SQL Queries
 TODO
-## Top 15 Rows of Each Query
+### Top 15 Rows of Each Query
 TODO
-# Final Index Design
+## Final Index Design
 TODO
