@@ -81,7 +81,7 @@ We assume the MealPlan entity to contain five attributes: MealPlanID, UserID, Re
 MealPlan is an entity on its own because meal plans are objects (things) created by users that contain aggregated information from the recipes. It has its own attribute Recipes and Name in VARCHAR(255) and Public in Boolean, which are all separate, important attributes aside from the primary key. 
 
 
-### Relationships
+### Relationship Cardinalities
 
 We have a grand total of six relationships in our database, four of which are one-to-many/many-to-one and two of which are many-to-many. Their assumptions and descriptions are laid out below.
 
