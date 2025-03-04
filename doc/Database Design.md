@@ -1,7 +1,7 @@
 # Database Implementation and Indexing
 
 ## Data Definition Language (DDL) Commands
-TODO
+TODO - Jake
 - CREATE TABLE UserInfo(UserID VARCHAR(255), Password VARCHAR(255), Name VARCHAR(255));
 
 - CREATE TABLE NutritionLog(UserID VARCHAR(255), Time DATETIME, RecipeID INT);
@@ -17,9 +17,9 @@ TODO
 - CREATE TABLE Foods(FoodNameVARCHAR(255), Calories INT, Fat INT, Carbohydrates INT, Protein INT);
 
 ## Insertion Commands
-TODO
+TODO - Chi
 ## Advanced SQL Queries
-TODO
+TODO - Dan and Jason
 ### Top 15 Rows of Each Query
 TODO
 ## Final Index Design
