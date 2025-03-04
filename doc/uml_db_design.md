@@ -54,7 +54,7 @@ We have a grand total of five entities in our database, with their assumptions a
 
 We plan to create a UserInfo entity, which we assume will contain a user’s login information. Therefore, this entity will be made up of the following three attributes: UserID, Password, and Name. Each user will create his or her account by specifying a unique username/email in the form of a VARCHAR that will be used as the primary key for the UserInfo table. The user should also enter their password, a VARCHAR, that will be used to log in. The user can enter their name, which is again a VARCHAR, which will be displayed in the user interface.
 
-UserInfo is an entity on its own because each user is an entity in and of themselves; making UserInfo into an attribute would make it very hard to separate users as entities within the database, and hurt our functionality of user customization through recipes and meal plans. Additionally, UserInfo is a many in a many-to-one relationship and it has multiple non-key attributes, which also helps justify it as an entity.
+UserInfo is an entity on its own because each user is an entity in and of themselves; making UserInfo into an attribute would make it very hard to separate users as entities within the database, and hurt our functionality of user customization through recipes and meal plans. Additionally, UserInfo has multiple non-key attributes, which also helps justify it as an entity.
   
 - **Foods**:
   
