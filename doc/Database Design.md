@@ -17,7 +17,7 @@ TODO - Jake
 - CREATE TABLE Foods(FoodNameVARCHAR(255), Calories INT, Fat INT, Carbohydrates INT, Protein INT);
 
 ## Insertion Commands
-TODO - Chi
+TODO - Chi - No Need to Write this here! Write in Google doc until we have Stage 2 graded.
 ## Advanced SQL Queries
 TODO - Dan and Jason
 ### Top 15 Rows of Each Query
