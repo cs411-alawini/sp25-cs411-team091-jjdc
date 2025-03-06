@@ -2,9 +2,17 @@
 
 ## Data Definition Language (DDL) Commands
 TODO - Jake
-- CREATE TABLE UserInfo(UserID VARCHAR(255), Password VARCHAR(255), Name VARCHAR(255));
+- CREATE TABLE UserInfo (
+    UserID VARCHAR(255),
+    Password VARCHAR(255),
+    Name VARCHAR(255) );
 
-- CREATE TABLE NutritionLog(UserID VARCHAR(255), Time DATETIME, RecipeID INT);
+- CREATE TABLE NutritionLog (
+    UserID VARCHAR(255),
+    Time DATETIME,
+    RecipeID INT
+    FOREIGN KEY UserID REFERENCES UserInfo(UserID)
+    ON DELETE CASCADE );
 
 - CREATE TABLE MealPlan(MealPlanID INT, UserID VARCHAR(255), Recipes VARCHAR(255), Name VARCHAR(255), Public BOOLEAN);
 
