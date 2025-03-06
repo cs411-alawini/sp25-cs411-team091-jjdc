@@ -19,7 +19,7 @@ TODO - Jake
 ## Insertion Commands
 TODO - Chi - No Need to Write this here! Write in Google doc until we have Stage 2 graded.
 ## Advanced SQL Queries
-TODO - Dan and Jason
+TODO - Dan and Jason - Give small description of each query for faster grading; make sure it's accurate though.
 ### Top 15 Rows of Each Query
 TODO
 ## Final Index Design
