@@ -36,7 +36,7 @@ classDiagram
       Name
       Public
   }
-UserInfo "1..1" -- "1..10" MealPlan : UserMealPlans
+UserInfo "1..1" -- "0..10" MealPlan : UserMealPlans
 UserInfo "1..1" -- "0..*" NutritionLog : Logs
 UserInfo "0..1" -- "0..10" Recipes : UserRecipes
 NutritionLog "0..*" -- "0..1" MealPlan : MealPlanLogs
