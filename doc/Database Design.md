@@ -7,16 +7,6 @@
     Password VARCHAR(255),
     Name VARCHAR(255) );
 
-- CREATE TABLE NutritionLog(
-    UserID VARCHAR(255) NOT NULL,
-    Time DATETIME,
-    RecipeID INT,
-    PRIMARY KEY (UserID, Time),
-    FOREIGN KEY UserID REFERENCES UserInfo(UserID),
-    ON DELETE CASCADE,
-    FOREIGN KEY RecipeID REFERENCES Recipes(RecipeID),
-    ON DELETE SET NULL );
-
 - CREATE TABLE MealPlan(
     MealPlanID INT PRIMARY KEY,
     UserID VARCHAR(255),
@@ -39,6 +29,16 @@
     Fat INT,
     Carbohydrates INT,
     Protein INT );
+
+- CREATE TABLE NutritionLog(
+    UserID VARCHAR(255) NOT NULL,
+    Time DATETIME,
+    RecipeID INT,
+    PRIMARY KEY (UserID, Time),
+    FOREIGN KEY UserID REFERENCES UserInfo(UserID),
+    ON DELETE CASCADE,
+    FOREIGN KEY RecipeID REFERENCES Recipes(RecipeID),
+    ON DELETE SET NULL );
   
 - CREATE TABLE MealPlanRecipes(
     MealPlanID INT,
