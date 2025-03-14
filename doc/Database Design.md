@@ -2,6 +2,8 @@
 
 ## Data Definition Language (DDL) Commands
 
+Below are the DDL Commands we used to make the tables in our database.
+
 - CREATE TABLE UserInfo(
     UserID VARCHAR(255) PRIMARY KEY,
     Password VARCHAR(255),
@@ -57,6 +59,13 @@
     ON DELETE CASCADE,
     FOREIGN KEY (FoodName) REFERENCES Foods(FoodName)
     ON DELETE CASCADE );
+
+### Screenshot of Tables
+
+Below is a screenshot of our terminal connection within GCP of our database and its tables.
+
+![Database Tables](https://github.com/user-attachments/assets/a815f24e-ce45-45ee-a83c-a779ee3d1ab2)
+
 
 ## Insertion Commands
 TODO - Chi - No Need to Write this here! Write in Google doc until we have Stage 2 graded.
