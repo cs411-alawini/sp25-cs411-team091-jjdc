@@ -14,13 +14,12 @@
     PRIMARY KEY (UserID, Time),
     FOREIGN KEY UserID REFERENCES UserInfo(UserID),
     ON DELETE CASCADE,
-    FOREIGN KEY RecipeID REFERENCES MealPlan(MealPlanID),
+    FOREIGN KEY RecipeID REFERENCES Recipes(RecipeID),
     ON DELETE SET NULL );
 
 - CREATE TABLE MealPlan(
     MealPlanID INT PRIMARY KEY,
     UserID VARCHAR(255),
-    Recipes VARCHAR(255),
     Name VARCHAR(255),
     Public BOOLEAN,
     FOREIGN KEY UserID REFERENCES UserInfo(UserID),
