@@ -69,6 +69,11 @@ Below is a screenshot of our terminal connection within GCP of our database and 
 
 ## Insertion Commands
 TODO - Chi - No Need to Write this here! Write in Google doc until we have Stage 2 graded.
+
+Below are screenshots of the three databases with over 1000 entries.
+
+![Foods](CountFoods.PNG)
+
 ## Advanced SQL Queries
 TODO - Dan and Jason (2 each) - Give small description of each query for faster grading; make sure it's accurate though.
 ### Top 15 Rows of Each Query
