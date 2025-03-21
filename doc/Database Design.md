@@ -72,7 +72,9 @@ TODO - Chi - No Need to Write this here! Write in Google doc until we have Stage
 
 Below are screenshots of the three databases with over 1000 entries.
 
+![foods](pics/CountFoods.PNG)
 
+![UserInfo](pics/CountUserInfo.PNG)
 
 ## Advanced SQL Queries
 TODO - Dan and Jason (2 each) - Give small description of each query for faster grading; make sure it's accurate though.
