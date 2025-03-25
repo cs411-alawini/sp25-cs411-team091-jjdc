@@ -2,7 +2,7 @@
 
 ## UML Diagram
 
-We have marked the primary keys with `[PK]` for clarity in our UML diagram below.
+We have marked the primary keys with `[PK]` for clarity in our UML diagram below. Ingredients is a Relationship, not an entity.
 
 ```mermaid
 classDiagram
@@ -35,12 +35,16 @@ classDiagram
       Name
       Public
   }
+class Ingredients {
+      Quantity
+  }
 UserInfo "1..1" -- "0..10" MealPlan : UserMealPlans
 UserInfo "1..1" -- "0..*" NutritionLog : Logs
 UserInfo "0..1" -- "0..10" Recipes : UserRecipes
 NutritionLog "0..*" -- "0..1" MealPlan : MealPlanLogs
 MealPlan "0..*" -- "1..*" Recipes : MealPlanRecipes
-Recipes "0..*" -- "1..*" Foods : Ingredients
+Recipes "0..*" -- Ingredients
+Ingredients "1..*" -- Foods
 ```
 ## Assumptions and Description of Entities and Relationships
 
@@ -58,7 +62,7 @@ UserInfo is an entity on its own because each user is an entity in and of themse
   
 We assume the Foods entity to contain five attributes, which are the food name, calories, fat, carbohydrates, and protein. These attributes are sourced directly from the existing datasets we use that contain the macronutrient information of various foods. FoodName is of the VARCHAR type, and Calories, Fat, Carbohydrates, and Protein are of the INT type (these are often measured in integer grams, so this makes sense). The datasets contains over 2000 entries of different kinds of foods. Each kind of food will have a unique name, which will be used as the primary key. For each kind of food, the datasets contain the common nutritional facts (calories, fat, carbohydrates, protein) per unit quantity (100 grams for example) about it. The Foods entity will not be editable by any user; it will only be edited by an admin if necessary (e.g., adding a new food).
 
-Foods is an entity on its own because each food is a thing, with characteristics such as calories and fat content. In this way, it’s clear that foods have at least three attributes other than their names (the primary key). Additionally, Foods is a many in a many-to-many relationship, further justifying its status as an entity.
+Foods is an entity on its own because each food is a thing, with characteristics such as calories and fat content. In this way, it’s clear that foods have at least three attributes other than their names (the primary key). Additionally, Foods is a many in a many-to-many relationship, further justifying its status as an entity. Also, a food item is measured per 100 grams of said food item.
   
 - **Recipes**:
 
@@ -85,7 +89,7 @@ We have a grand total of six relationships in our database, four of which are on
 
 - **UserInfo - Recipes (One-to-Many)**: UserInfo has a relationship with the Recipes entity, which has a cardinality of one-to-many. Each user will be able to create many (up to 10) recipes, but each recipe can only belong to one user. This means each user is linked to many recipes since we do not restrict them to only creating one recipe. We do this because restricting them to one recipe wouldn’t make much sense as people can make potentially infinitely many recipes and we chose 10 recipes as a limit so the data doesn’t get out of hand. 
   
-- **Recipes - Foods (Many-to-Many)**: The Recipes entity will have a relationship with our Foods database entity (called Ingredients in our diagram), and the cardinality of this relationship is many-to-many. This is because each food can belong to many recipes, and each recipe can have many different foods (ingredients). We chose this relationship because that’s how it works in real life (and is logical), since it would make no sense for a recipe to have only one food/ingredient or a food to belong only to one recipe. After all, that would severely limit the number of possible recipes. 
+- **Recipes - Foods (Many-to-Many)**: The Recipes entity will have a relationship with our Foods database entity (called Ingredients in our diagram), and the cardinality of this relationship is many-to-many. This is because each food can belong to many recipes, and each recipe can have many different foods (ingredients). We chose this relationship because that’s how it works in real life (and is logical), since it would make no sense for a recipe to have only one food/ingredient or a food to belong only to one recipe. After all, that would severely limit the number of possible recipes. The quantity of each food item is given so macronutrient information can be calculated properly.
 
 - **Recipes - MealPlan (Many-to-Many)**: Our Recipes entity will have a relationship with our MealPlan entity (called MealPlanRecipes). The cardinality of this relationship is many-to-many. This is because we plan to allow a meal plan to consist of many recipes (a user can store up to 10), and each recipe can belong to any number of meal plans. The reason for this is because a meal plan should consist of at least one recipe, otherwise there’s no meal plan. And we put no limit on the number of recipes in a meal plan because that is a decision that should be made by the user. It also makes no logical sense to limit each recipe to a single meal plan since recipes aren’t a resource with limited stock. For more clarity, a single meal plan can include multiple recipes, allowing users to record different recipes for each meal of the day, such as breakfast, lunch, and dinner. At the same time, a single recipe can be included in multiple meal plans. For example, chicken breast can be included both in “High Protein” and “Low Carbs” meal plans. This correspondence is recorded in the MealPlanRecipes table.
 
@@ -142,7 +146,8 @@ Name: VARCHAR(255))
 		Public: Boolean)
 
 - Ingredients(RecipeID: INT [FK to Recipes.RecipeID] [PK],
-			FoodName: VARCHAR(255) [FK to Foods.FoodName] [PK])
+			FoodName: VARCHAR(255) [FK to Foods.FoodName] [PK],
+  			Quantity: (NOT NULL) REAL)
 
 - Foods(FoodName: VARCHAR(255) [PK],
 			Calories: INT,
