@@ -55,6 +55,7 @@ Below are the DDL Commands we used to make the tables in our database.
     RecipeID INT,
     FoodName VARCHAR(255),
     PRIMARY KEY (RecipeID, FoodName),
+    Quantity REAL NOT NULL,
     FOREIGN KEY (RecipeID) REFERENCES Recipes(RecipeID)
     ON DELETE CASCADE,
     FOREIGN KEY (FoodName) REFERENCES Foods(FoodName)
