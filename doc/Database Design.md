@@ -77,6 +77,8 @@ Below are screenshots of the three databases with over 1000 entries.
 
 ![UserInfo](pics/CountUserInfo.PNG)
 
+![Recipes](pics/CountRecipes.PNG)
+
 ## Advanced SQL Queries
 TODO - Dan and Jason (2 each) - Give small description of each query for faster grading; make sure it's accurate though.
 ### Top 15 Rows of Each Query
