@@ -69,9 +69,8 @@ Below is a screenshot of our terminal connection within GCP of our database and 
 
 
 ## Insertion Commands
-TODO - Chi - No Need to Write this here! Write in Google doc until we have Stage 2 graded.
 
-Below are screenshots of the three databases with over 1000 entries.
+Below are screenshots of four of our tables with over 1000 entries.
 
 ![foods](pics/CountFoods.PNG)
 
@@ -79,9 +78,12 @@ Below are screenshots of the three databases with over 1000 entries.
 
 ![Recipes](pics/CountRecipes.PNG)
 
+![image](https://github.com/user-attachments/assets/c1a19239-43ce-4792-9b35-20b44a005e5a)
+
+
 ## Advanced SQL Queries
 TODO - Dan and Jason (2 each) - Give small description of each query for faster grading; make sure it's accurate though.
 ### Top 15 Rows of Each Query
 TODO - Dan and Jason (2 each; just output the query)
 ## Final Index Design
-TODO - Everyone (1 each)
+TODO - Everyone
