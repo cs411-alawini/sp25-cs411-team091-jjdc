@@ -82,7 +82,7 @@ Below are screenshots of four of our tables with over 1000 entries.
 
 
 ## Advanced SQL Queries and Top 15 Rows
-TODO - Dan and Jason - Provide Screenshots of top 15 rows.
+TODO - Dan and Jason - Provide Screenshots of top 15 rows for 1, 3, 4, and 5.
 
 Below are the commands used for each advanced SQL query as well as screenshots of the first 15 rows in the output.
 
