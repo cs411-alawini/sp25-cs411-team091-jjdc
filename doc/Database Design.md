@@ -81,9 +81,90 @@ Below are screenshots of four of our tables with over 1000 entries.
 ![image](https://github.com/user-attachments/assets/c1a19239-43ce-4792-9b35-20b44a005e5a)
 
 
-## Advanced SQL Queries
-TODO - Dan and Jason (2 each) - Give small description of each query for faster grading; make sure it's accurate though.
-### Top 15 Rows of Each Query
-TODO - Dan and Jason (2 each; just output the query)
+## Advanced SQL Queries and Top 15 Rows
+TODO - Dan and Jason - Provide Screenshots of top 15 rows.
+
+Below are the commands used for each advanced SQL query as well as screenshots of the first 15 rows in the output.
+
+1. SELECT SUM(Calories) AS sumCalories, SUM(Fat) AS sumFat, SUM(Carbohydrates) AS sumCarbohydrates, SUM(Protein) AS sumProtein
+FROM Foods NATURAL JOIN (SELECT FoodName 
+	FROM Ingredients
+	WHERE RecipeID IN (SELECT RecipeID
+		FROM MealPlanRecipes
+		WHERE RecipeID = currRecipe AND MealPlanID = currMealPlan)) AS ingredientNames;
+
+  
+
+2. SELECT COUNT(RecipeID), CurrDate
+FROM (SELECT UserID, CAST(Time AS DATE) AS CurrDate, RecipeID
+	FROM NutritionLog
+	WHERE UserID = currUser) AS userRecipes
+GROUP BY CurrDate;
+
+
+
+3. SELECT SUM(Calories) AS sumCalories, SUM(Fat) AS sumFat, SUM(Carbohydrates) AS sumCarbohydrates, SUM(Protein) AS sumProtein
+FROM Foods NATURAL JOIN (SELECT FoodName 
+	FROM Ingredients
+	WHERE RecipeID IN (SELECT RecipeID
+		FROM NutritionLog
+		WHERE UserID = currUser AND (CAST(Time AS DATE) = CURRENT_DATE()))) AS userDailyRecipes;
+
+  
+
+4. SELECT COUNT(MealPlanID) as MealPlanCount, CurrDate
+FROM (SELECT Name, MealPlanID, CAST(Time as DATE) AS CurrDate
+	FROM MealPlan
+	WHERE UserID = currUser) AS userMealPlans
+GROUP BY CurrDate;
+
+
+
+5. SELECT AVG(Calories) AS avgCalories, AVG(Fat) AS avgFat, AVG(Carbohydrates) AS avgCarbohydrates, AVG(Protein) AS avgProtein
+FROM Foods NATURAL JOIN (SELECT FoodName 
+	FROM Ingredients
+	WHERE RecipeID IN (SELECT RecipeID
+		FROM NutritionLog
+		WHERE UserID = currUser AND (CAST(Time AS DATE) = CURRENT_DATE()))) AS userDailyAvg;
+
+  
+
+6. SELECT FoodName, COUNT(FoodName) as countIngredients
+FROM MealPlan NATURAL JOIN MealPlanRecipes NATURAL JOIN Ingredients
+WHERE UserID = currUser
+GROUP BY FoodName
+ORDER BY countIngredients DESC;
+
+
+
 ## Final Index Design
 TODO - Everyone
+
+Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZE command with the different indices, making final remarks for each query. We do not repeat the queries because we use the same numbering as above.
+
+### 1. 
+
+TODO
+
+### 2. 
+
+TODO
+
+### 3. 
+
+TODO
+
+### 4. 
+
+TODO
+
+### 5. 
+
+TODO
+
+### 6. 
+
+TODO
+
+### Final Analysis
+TODO
