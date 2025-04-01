@@ -121,12 +121,14 @@ FROM Foods NATURAL JOIN (SELECT FoodName
   
 
 4. SELECT COUNT(MealPlanID) as MealPlanCount, CurrDate
-FROM (SELECT Name, MealPlanID, CAST(Time as DATE) AS CurrDate
-	FROM MealPlan
-	WHERE UserID = currUser) AS userMealPlans
-GROUP BY CurrDate;
+FROM (SELECT UserID, MealPlanID, CAST(Time as DATE) AS CurrDate
+	FROM MealPlan NATURAL JOIN NutritionLog
+	WHERE UserID = currUser and Public = 1) AS userMealPlans
+GROUP BY CurrDate; 
 
+For the purposes of our query, we replaced currUser with 'aabrahmovicio6', one of our current users. We note that this query only outputs 2 rows because user 'aabrahmovicio6' only has two meal plans created on 07/03/2024 and one meal plan created on 03/30/2025 in their nutrition log. This query is meant to return the number of public meal plans made on a given date by a user, namely in our case, 'aabrahmovicio6'.
 
+<img width="1000" alt="query 1 SQL" src="https://github.com/user-attachments/assets/6587a5f7-32d6-4f13-ab5a-6ecccc344a1d" />
 
 5. SELECT AVG(Calories) AS avgCalories, AVG(Fat) AS avgFat, AVG(Carbohydrates) AS avgCarbohydrates, AVG(Protein) AS avgProtein
 FROM Foods NATURAL JOIN (SELECT FoodName 
@@ -135,17 +137,21 @@ FROM Foods NATURAL JOIN (SELECT FoodName
 		FROM NutritionLog
 		WHERE UserID = currUser AND (CAST(Time AS DATE) = CURRENT_DATE()))) AS userDailyAvg;
 
-  
-
-6. SELECT FoodName, COUNT(FoodName) as countIngredients
-FROM MealPlan NATURAL JOIN MealPlanRecipes NATURAL JOIN Ingredients
-WHERE UserID = currUser
-GROUP BY FoodName
-ORDER BY countIngredients DESC;
-
 For the purposes of our query, we replaced currUser with 'jattoenn', one of our current users. This query returns null values for all columns because user 'jattoenn' has no entries on the current day (03/29/2025) in their nutrition log. This query is meant to return the average calories, carbohydrates, fats, and proteins an individual user has eaten in a given day, based on their recipe intake, adjusted by the quantities listed in the Ingredients table that go into the recipes.
 
 ![image](https://github.com/user-attachments/assets/f181dc3c-a916-4bac-9139-e528155f5373)
+
+6. SELECT FoodName, COUNT(FoodName) as timesIngredientUsed, Quantity
+FROM NutritionLog NATURAL JOIN Ingredients NATURAL JOIN Foods
+WHERE UserID = currUser AND Protein >= 20
+GROUP BY FoodName, Quantity
+HAVING Quantity >= 100
+ORDER BY timesIngredientUsed DESC;
+
+For the purposes of our query, we replaced currUser with 'aabrahmovicio6', one of our current users. This query returns the most common high-protein, high-quantity ingredients that user 'aabrahmovicio6' uses in their meal plan recipes. This query returns the food name, the amount of times this ingredient was used, and the quantity that was used for this ingredient.
+
+<img width="1000" alt="query 2 SQL" src="https://github.com/user-attachments/assets/ccf66a65-22c5-47dd-ba13-7a281290d537" />
+
 
 
 ## Final Index Design
@@ -188,13 +194,25 @@ TODO
 
 ### 4. 
 
-TODO
+- Original Cost: 1.73
+  
+  <img width="935" alt="original cost query 1 actual" src="https://github.com/user-attachments/assets/c076a7fb-f769-45ec-9bc9-6fd73d6a5fd2" />
+
+- Single Index on MealPlan.Public: 1.73
+  
+  <img width="935" alt="optimized cost public query 1" src="https://github.com/user-attachments/assets/43d99415-44ef-49bb-b698-5e939b116e8d" />
+
+- Index on both MealPlan.Public and MealPlan.UserID: 1.73
+  
+  <img width="929" alt="optimized cost both query 1" src="https://github.com/user-attachments/assets/e9ef03b4-95ad-4658-9133-7daf9cee38c7" />
+
+- Single Index on MealPlan.UserID: 1.73
+  
+  <img width="932" alt="optimized cost userID query 1" src="https://github.com/user-attachments/assets/79baef2b-5c02-40d9-9d28-848442211d55" />
+
+- Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
 
 ### 5. 
-
-TODO
-
-### 6. 
 
 - Original Cost: 12
 
@@ -214,6 +232,26 @@ TODO
   ![image](https://github.com/user-attachments/assets/d36eb85b-aa7d-4289-b8b1-d7b33590caa1)
 
 - Best Index Design by Cost: We note that the best index design was the one only with Ingredients.Quantity. The others likely did not work well because their values did not depend on any others, while Ingredients.Quantity does depend on the Food(s) involved due to the foreign key relationship. Further testing may be required on this, but because of the other testing on Foods indices, it is likely that this index design is best for this type of query.
+
+### 6. 
+- Original Cost: 12.7
+  
+  <img width="935" alt="original cost query 2 actual" src="https://github.com/user-attachments/assets/78fe699a-6a2b-4121-9280-fbe2b3fa1543" />
+
+- Single Index on Ingredients.Quantity: 12.7
+  
+  <img width="938" alt="optimized cost quantity query 2" src="https://github.com/user-attachments/assets/a9fa9281-5a90-48ce-bd6a-a685adaeb2d2" />
+
+- Indices on both Ingredients.Quantity and Foods.Protein: 12.7
+  
+  <img width="937" alt="optimized cost both query 2" src="https://github.com/user-attachments/assets/dc17e37c-1c57-471a-9c56-990c1349fe17" />
+
+- Single Index on Foods.Protein: 12.7
+  
+  <img width="936" alt="optimized cost Protein query 2" src="https://github.com/user-attachments/assets/604a7cd6-9b04-4a0f-b26d-dc574e95cfc2" />
+  
+- Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
+
 
 ### Final Analysis
 TODO
