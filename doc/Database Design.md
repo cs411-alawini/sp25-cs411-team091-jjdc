@@ -95,6 +95,7 @@ FROM Foods NATURAL JOIN (SELECT FoodName
 
 ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/sql_adv_query_output2.png)
 
+For the purposes of this query, when running it in SQL, we replaced currMealPlan with a hardcoded value (as seen in the screenshot). In this case, we gave it the meal plan IDs of 0 and 1, but when running it with the website, it would utilize the current user's selected meal plan id. Also, you can see that this advanced query only returns one row, not 15 rows. The reason for this is its aggregation commands. This advanced query is meant to return to a certain user the total macronutrient content for their selected meal plan. As a result, it makes sense that only one row gets returned, which is the row containing the total macro nutrient content of the meal plan with ID currMealPlan (0 or 1 in the screen shots). Returning multiple rows wouldn't make sense for this advanced query unless it is modified to return the macronutrient content of multiple meal plans at once.
   
 
 2. SELECT COUNT(RecipeID), CurrDate
@@ -121,6 +122,8 @@ FROM Foods NATURAL JOIN (SELECT FoodName
 		WHERE UserID = currUser AND (CAST(Time AS DATE) = CURRENT_DATE()))) AS userDailyRecipes;
 
 ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/sql_adv_query_output1.png)
+
+For the purposes of this advanced query, currUser was replaced with a hardcoded value, the user ID 'aabrahmovicio6' in this case. The reason for this is that it needs to be an actual user id to run, and when this query runs on the website, it would receive the current user's ID as input. This advanced query is meant to take the current date as input and the current user's ID and find the total macronutrient count of everything that user ate that day. So, due to the aggregation, only one row is returned by the advanced query (instead of 15), which makes sense as it aggregates all the macronutrient information together. If multiple rows were to be returned, this advanced query would need to be changed to give the macronutrient content of every recipe eaten on the current date (without aggregation).
 
   
 
