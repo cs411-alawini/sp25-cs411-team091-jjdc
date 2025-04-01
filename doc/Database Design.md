@@ -93,6 +93,8 @@ FROM Foods NATURAL JOIN (SELECT FoodName
 		FROM MealPlanRecipes
 		WHERE MealPlanID = currMealPlan)) AS ingredientNames;
 
+![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/sql_adv_query_output2.png)
+
   
 
 2. SELECT COUNT(RecipeID), CurrDate
@@ -117,6 +119,8 @@ FROM Foods NATURAL JOIN (SELECT FoodName
 	WHERE RecipeID IN (SELECT RecipeID
 		FROM NutritionLog
 		WHERE UserID = currUser AND (CAST(Time AS DATE) = CURRENT_DATE()))) AS userDailyRecipes;
+
+![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/sql_adv_query_output1.png)
 
   
 
