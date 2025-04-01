@@ -91,7 +91,7 @@ FROM Foods NATURAL JOIN (SELECT FoodName
 	FROM Ingredients
 	WHERE RecipeID IN (SELECT RecipeID
 		FROM MealPlanRecipes
-		WHERE RecipeID = currRecipe AND MealPlanID = currMealPlan)) AS ingredientNames;
+		WHERE MealPlanID = currMealPlan)) AS ingredientNames;
 
   
 
@@ -161,7 +161,24 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
 
 ### 1. 
 
-TODO
+- Original Cost: 19.4
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_2.png)
+
+- Multiple Index on Foods(Calories, Fat, Carbohydrates, Protein): 15.4
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_3.png)
+
+
+- Single Index on Foods(Calories): 15.4
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_4.png)
+
+
+- Single Index on Foods(Fat): 15.4
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_5.png)
+
+
+- Single Index on Foods(Carbohydrates): 15.4
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_6.png)
+
 
 ### 2. 
 
@@ -190,7 +207,29 @@ TODO
 
 ### 3. 
 
-TODO
+- Original Cost: 29.5
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_1.png)
+
+
+- Multiple Index on Foods(Calories, Fat, Carbohydrates, Protein): 23.5
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_7.png)
+
+
+- Single Index on Foods(Calories): 23.5
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_8.png)
+
+
+- Single Index on Foods(Fat): 22.9
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_10.png)
+
+
+- Single Index on Foods(Carbohydrates): 22.9
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_11.png)
+
+
+- Single Index on NutritionLog(RecipeID): 22.9
+  ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_9.png)
+
 
 ### 4. 
 
