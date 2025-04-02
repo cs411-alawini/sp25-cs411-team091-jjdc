@@ -301,5 +301,3 @@ Best Index Design by Cost: We note that the best index design was the one only w
 Best Index Design by Cost: We note that the best index design would be the one using either Ingredients.Quantity and Foods.Protein or just Foods.Protein by itself. We would likely choose just Foods.Protein by itself because it makes the design simpler. Protein and quantity are being checked in the query constantly and since there are so few unique values, adding an index to both would reduce cost dramatically, but we would like to keep the model as simple as possible for future queries. 
 
 
-### Final Analysis
-TODO
