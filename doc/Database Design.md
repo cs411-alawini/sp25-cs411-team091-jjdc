@@ -260,7 +260,7 @@ Best Index Design by Cost: In this advanced query, the only non-primary key used
   
   <img width="932" alt="optimized cost userID query 1" src="https://github.com/user-attachments/assets/79baef2b-5c02-40d9-9d28-848442211d55" />
 
-Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
+Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query. Additionally, the values of these keys do not depend on others, so we would choose no indexing to make this design simpler.  
 
 ### 5. 
 
@@ -284,23 +284,23 @@ Best Index Design by Cost: We note that the best index design would be any of th
 Best Index Design by Cost: We note that the best index design was the one only with Ingredients.Quantity. The others likely did not work well because their values did not depend on any others, while Ingredients.Quantity does depend on the Food(s) involved due to the foreign key relationship. Further testing may be required on this, but because of the other testing on Foods indices, it is likely that this index design is best for this type of query.
 
 ### 6. 
-- Original Cost: 12.7
+- Original Cost: 31.8
   
-  <img width="935" alt="original cost query 2 actual" src="https://github.com/user-attachments/assets/78fe699a-6a2b-4121-9280-fbe2b3fa1543" />
+  <img width="938" alt="original cost query 2 actual" src="https://github.com/user-attachments/assets/7ec0f839-81b1-4c89-8e53-dd5ffb890f83" />
 
-- Single Index on Ingredients.Quantity: 12.7
+- Single Index on Ingredients.Quantity: 28.3
   
-  <img width="938" alt="optimized cost quantity query 2" src="https://github.com/user-attachments/assets/a9fa9281-5a90-48ce-bd6a-a685adaeb2d2" />
+  <img width="941" alt="optimized cost quantity query 2" src="https://github.com/user-attachments/assets/22d0dec7-097e-4bfa-905f-2c214cfb294e" />
 
-- Indices on both Ingredients.Quantity and Foods.Protein: 12.7
-  
-  <img width="937" alt="optimized cost both query 2" src="https://github.com/user-attachments/assets/dc17e37c-1c57-471a-9c56-990c1349fe17" />
+- Indices on both Ingredients.Quantity and Foods.Protein: 21.6
 
-- Single Index on Foods.Protein: 12.7
+  <img width="941" alt="optimized cost both actual query 2" src="https://github.com/user-attachments/assets/2ca1f151-f8e6-4201-ad06-f733c5711f62" />
+
+- Single Index on Foods.Protein: 21.6
   
-  <img width="936" alt="optimized cost Protein query 2" src="https://github.com/user-attachments/assets/604a7cd6-9b04-4a0f-b26d-dc574e95cfc2" />
-  
-Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
+  <img width="940" alt="optimized cost protein query 2" src="https://github.com/user-attachments/assets/d94e2748-b89d-4bb3-b22b-b6e846d827a6" />
+
+Best Index Design by Cost: We note that the best index design would be the one using either Ingredients.Quantity and Foods.Protein or just Foods.Protein by itself. We would likely choose just Foods.Protein by itself because it makes the design simpler. Protein and quantity are being checked in the query constantly and since there are so few unique values, adding an index to both would reduce cost dramatically, but we would like to keep the model as simple as possible for future queries. 
 
 
 ### Final Analysis
