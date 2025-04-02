@@ -186,6 +186,8 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
 - Single Index on Foods(Carbohydrates): 15.4
   ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_6.png)
 
+Best Index Design by Cost: As can be seen in the xcreen shots, all four indexes have the same effectiveness in decreasing the cost of the advanced query. The likely reason for this is probably because the attributes used in the join and where statements are all primary keys, so only the attributes used in the aggregation at the top-most select statement are non-primary key attributes. As a result, the attributes used for indexing (Calories, Fat, Carbohydrates, Protein from the Foods table) aren't used for filtering anywhere else in the advanced query. So, indexing on these attributes would likely give the same result no matter which attribute is chosen. So, I will just choose indexing on Foods(Calories) as the best (final) indexing design for this advanced query, and because if there was more information, Calories may be a useful query to index on.
+
 
 ### 2. 
 
@@ -210,7 +212,7 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
   ![image](https://github.com/user-attachments/assets/0c433537-079e-4c64-ac26-817427cd36cb)
 
 
-- Best Index Design by Cost: Both the single index on Recipes.Public and the two indices on both Recipes.Public and NutritionLog.RecipeID have the same cost. However, one could choose the simpler index design of only Recipes.Public for simplicity/parsimony in case of future queries. However, time-wise, having both indices is slightly faster. Either choice could be made, depending on the other queries. 
+Best Index Design by Cost: Both the single index on Recipes.Public and the two indices on both Recipes.Public and NutritionLog.RecipeID have the same cost. However, one could choose the simpler index design of only Recipes.Public for simplicity/parsimony in case of future queries. However, time-wise, having both indices is slightly faster. Either choice could be made, depending on the other queries. 
 
 ### 3. 
 
@@ -237,6 +239,8 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
 - Single Index on NutritionLog(RecipeID): 22.9
   ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_9.png)
 
+Best Index Design by Cost: In this advanced query, the only non-primary key used in a where or join clause (for filtering) is the RecipeID attribute from the nutrition log table. The other non-primary key attributes (Calories, Fat, Carbohydrates, Protein from Foods) are only used for aggregation in the advanced query. Looking at the screenshots above, you can see that indexing on all four attributes or just Calories from Foods (used in the advanced query) decreases the cost by 6. But indexing on Fat, Carbohydrates, or RecipeID from NutritionLog decreased the cost by 6.6. RecipeID decreases the cost by 6.6, likely because it is used for filtering (in a where statement). As for Fat and Carbohydrates, the reason indexing on those attributes decreases the cost more may be because they fit the structure of the Foods table and the query better. I will choose the index on RecipeID from NutritionLog as the final index design for this advanced query because it's a non-primary key used for filtering in the advanced query, and it decreases the cost by 6.6.
+
 
 ### 4. 
 
@@ -256,7 +260,7 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
   
   <img width="932" alt="optimized cost userID query 1" src="https://github.com/user-attachments/assets/79baef2b-5c02-40d9-9d28-848442211d55" />
 
-- Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
+Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
 
 ### 5. 
 
@@ -277,7 +281,7 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
 
   ![image](https://github.com/user-attachments/assets/d36eb85b-aa7d-4289-b8b1-d7b33590caa1)
 
-- Best Index Design by Cost: We note that the best index design was the one only with Ingredients.Quantity. The others likely did not work well because their values did not depend on any others, while Ingredients.Quantity does depend on the Food(s) involved due to the foreign key relationship. Further testing may be required on this, but because of the other testing on Foods indices, it is likely that this index design is best for this type of query.
+Best Index Design by Cost: We note that the best index design was the one only with Ingredients.Quantity. The others likely did not work well because their values did not depend on any others, while Ingredients.Quantity does depend on the Food(s) involved due to the foreign key relationship. Further testing may be required on this, but because of the other testing on Foods indices, it is likely that this index design is best for this type of query.
 
 ### 6. 
 - Original Cost: 12.7
@@ -296,7 +300,7 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
   
   <img width="936" alt="optimized cost Protein query 2" src="https://github.com/user-attachments/assets/604a7cd6-9b04-4a0f-b26d-dc574e95cfc2" />
   
-- Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
+Best Index Design by Cost: We note that the best index design would be any of the indices or none of them since the cost does not change when adding indices. They all did not work likely because the attributes that we are joining on are primary keys, so indices are not necessary for this query.
 
 
 ### Final Analysis
