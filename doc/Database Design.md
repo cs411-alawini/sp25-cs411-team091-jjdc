@@ -82,7 +82,6 @@ Below are screenshots of four of our tables with over 1000 entries.
 
 
 ## Advanced SQL Queries and Top 15 Rows
-TODO - Dan and Jason - Provide Screenshots of top 15 rows for 1, 3, 4, and 5.
 
 Below are the commands used for each advanced SQL query as well as screenshots of the first 15 rows in the output.
 
@@ -155,14 +154,13 @@ GROUP BY FoodName, Quantity
 HAVING Quantity >= 100
 ORDER BY timesIngredientUsed DESC;
 
-For the purposes of our query, we replaced currUser with 'aabrahmovicio6', one of our current users. This query returns the most common high-protein, high-quantity ingredients that user 'aabrahmovicio6' uses in their meal plan recipes. This query returns the food name, the amount of times this ingredient was used, and the quantity that was used for this ingredient.
+For the purposes of our query, we replaced currUser with 'aabrahmovicio6', one of our current users. This query returns the most common high-protein, high-quantity ingredients that user 'aabrahmovicio6' uses in their meal plan recipes. This query returns the food name, the amount of times this ingredient was used, and the quantity in grams that was used for this ingredient.
 
 <img width="1000" alt="query 2 SQL" src="https://github.com/user-attachments/assets/ccf66a65-22c5-47dd-ba13-7a281290d537" />
 
 
 
 ## Final Index Design
-TODO - Everyone
 
 Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZE command with the different indices, making final remarks for each query. We do not repeat the queries because we use the same numbering as above.
 
@@ -186,7 +184,7 @@ Below we have grouped each SQL query and shown the output of each EXPLAIN ANALYZ
 - Single Index on Foods(Carbohydrates): 15.4
   ![image](https://github.com/cs411-alawini/sp25-cs411-team091-jjdc/blob/main/doc/pics/jrliao2index_images/index_test_6.png)
 
-Best Index Design by Cost: As can be seen in the xcreen shots, all four indexes have the same effectiveness in decreasing the cost of the advanced query. The likely reason for this is probably because the attributes used in the join and where statements are all primary keys, so only the attributes used in the aggregation at the top-most select statement are non-primary key attributes. As a result, the attributes used for indexing (Calories, Fat, Carbohydrates, Protein from the Foods table) aren't used for filtering anywhere else in the advanced query. So, indexing on these attributes would likely give the same result no matter which attribute is chosen. So, I will just choose indexing on Foods(Calories) as the best (final) indexing design for this advanced query, and because if there was more information, Calories may be a useful query to index on.
+Best Index Design by Cost: As can be seen in the screen shots, all four indexes have the same effectiveness in decreasing the cost of the advanced query. The likely reason for this is probably because the attributes used in the join and where statements are all primary keys, so only the attributes used in the aggregation at the top-most select statement are non-primary key attributes. As a result, the attributes used for indexing (Calories, Fat, Carbohydrates, Protein from the Foods table) aren't used for filtering anywhere else in the advanced query. So, indexing on these attributes would likely give the same result no matter which attribute is chosen. So, I will just choose indexing on Foods(Calories) as the best (final) indexing design for this advanced query, and because if there was more information, Calories may be a useful query to index on.
 
 
 ### 2. 
