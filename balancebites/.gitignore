@@ -1,4 +1,3 @@
 build
-.env*
-*/node_modules
-*/public
+
+../jjdc_recipe_tracker_proj
