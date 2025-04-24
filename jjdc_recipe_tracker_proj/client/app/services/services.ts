@@ -30,6 +30,7 @@ export const searchUserData = (query: string): Promise<User[]> => {
 // just use a simple axios.post?
 // this is for sending the registering request to the api
 export const register = (userID: string, pass: string, username: string): Promise<User> => {
+  console.log(BASE_URL);
   return httpClient.post('/api/balancebites', {
     params: {
       userid: userID,
