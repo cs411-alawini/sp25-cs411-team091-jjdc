@@ -3,6 +3,13 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3007'; // process.env.REACT_APP_API_BASE_URL 
 
 
+export interface User {
+  UserID: string;
+  Password: string;
+  Name: string;
+}
+
+
 export const httpClient = axios.create({
     baseURL: BASE_URL,
     headers: {
@@ -10,11 +17,6 @@ export const httpClient = axios.create({
     },
 });
 
-export interface User {
-    UserID: string;
-    Password: string;
-    Name: string;
-}
 
 export const searchUserData = (query: string): Promise<User[]> => {
     console.log(BASE_URL);
@@ -24,4 +26,24 @@ export const searchUserData = (query: string): Promise<User[]> => {
       })
       .then((response) => response.data);
 };
+
+// just use a simple axios.post?
+// this is for sending the registering request to the api
+export const register = (userID: string, pass: string, username: string): Promise<User> => {
+  return httpClient.post('/api/balancebites', {
+    params: {
+      userid: userID,
+      password: pass,
+      name: username,
+    }
+  }).then((response) => response.data);
+}
+
+// This is for sending the login info to the api to check if things match.
+export const login = () => {
+  httpClient.post('/api/balancebites', {
+    
+  })
+}
+
 
