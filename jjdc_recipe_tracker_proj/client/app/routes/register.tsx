@@ -35,7 +35,7 @@ export default function Register() {
         <Card className="dark p-8 rounded-md m-2 md:w-1/2">
           <CardBody>
             <Row>
-              <Col>
+              <Col> 
                 <h1 className="text-3xl font-bold text-center mb-4">
                   Create an account
                 </h1>
@@ -44,36 +44,28 @@ export default function Register() {
                     <Col>
                       <Input
                         type="text"
-                        name="firstName"
-                        label="First Name (Optional)"
-                      />
-                    </Col>
-                  </Row>
-                  <Row className="mt-2">
-                    <Col>
-                      <Input
-                        type="text"
-                        name="lastName"
-                        label="Last Name (Optional)"
-                      />
-                    </Col>
-                  </Row>
-                  <Row className="mt-2">
-                    <Col>
-                      <Input
-                        type="text"
-                        name="username"
-                        label="Username"
+                        name="name"
+                        placeholder="Enter Your Name (required)"
                         isRequired
                       />
                     </Col>
                   </Row>
-                  <Row className="mt-2">
+                  <Row className="mt-4">
+                    <Col>
+                      <Input
+                        type="text"
+                        name="username"
+                        placeholder="Enter Your User ID (required)"
+                        isRequired
+                      />
+                    </Col>
+                  </Row>
+                  <Row className="mt-4">
                     <Col>
                       <Input
                         type="password"
                         name="password"
-                        label="Password"
+                        placeholder="Enter Your Password (required)"
                         isRequired
                       />
                       {/* {actionData?.success && (
@@ -92,7 +84,7 @@ export default function Register() {
                       )} */}
                     </Col>
                   </Row>
-                  <Row className="mt-3">
+                  <Row className="mt-4">
                     <Col xs={12} md={12}>
                       <Button
                         type="submit"
