@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser} from "../services/database";
+import { getAllUser, addUser} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -24,6 +24,19 @@ router.get("/", async (req: Request, res: Response) => {
     } else {
     }
 });
+
+router.post("/", async (req: Request, res: Response) => {
+    const newUser: User = req.body;
+    if (!req.query.search) {
+        try {
+            const user = await addUser(newUser);
+            res.status(201).json(user);
+        } catch (error) {
+            res.status(500).json({ message: "Error adding User" });
+        }
+    }
+});
+
 
 
 export default router;
