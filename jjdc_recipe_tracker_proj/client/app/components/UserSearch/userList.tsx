@@ -39,7 +39,7 @@ const UserList: React.FC<UserListProps> = ({ userData }) => {
 
 //     fetchImages();
 //   }, [pokemonData]); // Runs whenever pokemonData changes
-
+  console.log(userData)
   return (
     <ul className="divide-y divide-gray-200">
       {userData.map((user) => (

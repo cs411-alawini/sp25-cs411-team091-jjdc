@@ -9,12 +9,15 @@ export function UserSearching() {
     const [userData, setUserData] = React.useState<User[]>([]);
 
     const handleSearch = (query: string) => {
+        console.log(query)
         setSearchQuery(query);
     }
 
     useEffect(() => {
         const fetchData = async() => {
             setUserData([]);
+            console.log("hei?")
+            console.log(searchQuery)
             const data = await searchUserData(searchQuery);
             // console.log(data);
             setUserData(data);

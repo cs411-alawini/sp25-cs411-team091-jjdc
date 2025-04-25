@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, addUser} from "../services/database";
+import { getAllUser, getUserByUserID, addUser} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -20,14 +20,25 @@ router.get("/", async (req: Request, res: Response) => {
         } catch (error) {
             res.status(500).json({ message: "Error fetching Users" });
         }
-
-    } else {
+    }
+    else {
+        const query = req.query.search as string;
+        console.log(query)
+        try {
+            const users: User[] = await getUserByUserID(query)
+            res.status(200).json(users);
+        } catch (error) {
+            res.status(500).json({ message: "Error fetching Users by ID" });
+        }
     }
 });
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/register", async (req: Request, res: Response) => {
     const newUser: User = req.body;
     if (!req.query.search) {
+
+    }
+    else {
         try {
             const user = await addUser(newUser);
             res.status(201).json(user);

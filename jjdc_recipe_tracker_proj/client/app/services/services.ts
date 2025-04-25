@@ -20,6 +20,7 @@ export const httpClient = axios.create({
 
 export const searchUserData = (query: string): Promise<User[]> => {
     console.log(BASE_URL);
+    console.log("heeyyy")
     return httpClient
       .get(`/api/balancebites`, {
         params: { search: query },
@@ -31,6 +32,7 @@ export const searchUserData = (query: string): Promise<User[]> => {
 // this is for sending the registering request to the api
 export const register = (userID: string, pass: string, username: string): Promise<User> => {
   console.log(BASE_URL);
+  let newUser = {}
   return httpClient.post('/api/balancebites', {
     params: {
       userid: userID,
