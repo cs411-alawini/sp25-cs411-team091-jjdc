@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, addUser} from "../services/database";
+import { getAllUser, addUser, getUserMacros} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -33,6 +33,18 @@ router.post("/", async (req: Request, res: Response) => {
             res.status(201).json(user);
         } catch (error) {
             res.status(500).json({ message: "Error adding User" });
+        }
+    }
+});
+router.get("/macros", async (req: Request, res: Response) => {
+    const userId = 'aabrahmovicio6';
+    if (!req.query.search) {
+        try {
+            const macros = await getUserMacros(userId);
+            console.log(macros);
+            res.status(201).json(macros);
+        } catch (error) {
+            res.status(500).json({ message: "Error fetching macros" });
         }
     }
 });

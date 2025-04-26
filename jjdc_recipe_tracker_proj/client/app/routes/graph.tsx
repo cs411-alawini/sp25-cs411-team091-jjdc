@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   BarChart,
   Bar,
@@ -23,7 +22,6 @@ const data = [
 
 const ExampleGraph: React.FC = () => {
   return (
-    <div>
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
@@ -34,10 +32,6 @@ const ExampleGraph: React.FC = () => {
         <Bar type="monotone" dataKey="total" stroke="#8884d8" fill="#0000FF" name = "Total Calories" />
       </BarChart>
     </ResponsiveContainer>
-    <Link to="/register">
-      <button>Go to Another Page</button>
-    </Link>
-    </div>
   );
 };
 const CustomTooltip = ({ active, payload, label }: any) => {
