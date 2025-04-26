@@ -15,9 +15,11 @@ export async function getAllUser(): Promise<User[]> {
 }
 
 export async function getUserByUserID(UserID: string): Promise<User[]> {
+    console.log("running this specific user one")
     const queryName = UserID;//.toLowerCase();
     const sqlQuery = `SELECT * FROM BalanceBites.UserInfo WHERE UserID LIKE '%${queryName}%';`;
     const [rows] = await pool.query(sqlQuery);
+    console.log(rows)
     return rows as User[];
 }
 
