@@ -49,14 +49,12 @@ router.post("/register", async (req: Request, res: Response) => {
 });
 router.get("/macros", async (req: Request, res: Response) => {
     const userId = 'aabrahmovicio6';
-    if (!req.query.search) {
-        try {
-            const macros = await getUserMacros(userId);
-            console.log(macros);
-            res.status(201).json(macros);
-        } catch (error) {
-            res.status(500).json({ message: "Error fetching macros" });
-        }
+    try {
+        const macros = await getUserMacros(userId);
+        console.log(macros);
+        res.status(201).json(macros);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching macros" });
     }
 });
 

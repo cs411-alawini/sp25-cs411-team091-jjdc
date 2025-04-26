@@ -33,12 +33,14 @@ export async function updateUserID(User: User): Promise<void> {
     await pool.query(sqlQuery);
 }
 export async function getUserMacros(UserID: string): Promise<any> {
-    const sqlQuery = `SELECT SUM(Calories) AS sumCalories, SUM(Fat) AS sumFat, SUM(Carbohydrates) AS sumCarbohydrates, SUM(Protein) AS sumProtein
-    FROM Foods NATURAL JOIN (SELECT FoodName 
-        FROM Ingredients
-        WHERE RecipeID IN (SELECT RecipeID
-            FROM NutritionLog
-            WHERE UserID = '${UserID}')) AS userDailyRecipes`;
+    const sqlQuery = `SELECT DAYNAME(Time) as dayOfWeek, SUM(Calories) AS sumCalories, SUM(Fat) AS sumFat, SUM(Carbohydrates) AS sumCarbohydrates, SUM(Protein) AS sumProtein
+    FROM Foods NATURAL JOIN (SELECT FoodName, Time
+        FROM Ingredients JOIN NutritionLog USING (RecipeID)
+        WHERE UserID = '${UserID}') AS userDailyRecipes
+        GROUP BY 
+            dayOfWeek
+        ORDER BY
+            dayOfWeek`;
     const result = await pool.query(sqlQuery);
     return result[0];
 }

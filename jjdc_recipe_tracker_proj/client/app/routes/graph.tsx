@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -9,18 +9,34 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-
-const data = [
-  { name: 'Monday', total: 1000, value: 40 },
-  { name: 'Tuesday', total: 1000, value: 20 },
-  { name: 'Wednesday', total: 1300, value: 50 },
-  { name: 'Thursday', total: 1200, value: 40},
-  { name: 'Friday', total: 1280, value: 20 },
-  { name: 'Saturday', total: 1109, value: 50 },
-  { name: 'Sunday', total: 1003, value: 50 }
-];
+import axios from 'axios';
 
 const ExampleGraph: React.FC = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchUserMacros = async () => {
+      try {
+        const response = await axios.get('http://localhost:3007/api/balancebites/macros');
+        const backendData = response.data;
+
+        const chartData = backendData.map((item: any) => ({
+          name: item.dayOfWeek,
+          calories: item.sumCalories,
+          fat: item.sumFat,
+          carbs: item.sumCarbohydrates,
+          protein: item.sumProtein,
+        }));
+
+        setData(chartData);
+      } catch (error) {
+        console.error('Error fetching macros data:', error);
+      }
+    };
+
+    fetchUserMacros();
+  }, []);
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data}>
@@ -29,19 +45,22 @@ const ExampleGraph: React.FC = () => {
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar type="monotone" dataKey="total" stroke="#8884d8" fill="#0000FF" name = "Total Calories" />
+        <Bar dataKey="calories" fill="#82ca9d" name="Calories" />
       </BarChart>
     </ResponsiveContainer>
   );
 };
+
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
       <div style={{ backgroundColor: 'white', border: '1px solid #ccc', padding: 10 }}>
         <p><strong>{label}</strong></p>
-        <p>Total Calories: {data.total}</p>
-        <p>Value A: {data.value}</p>
+        <p>Calories: {data.calories}</p>
+        <p>Fat: {data.fat}g</p>
+        <p>Carbs: {data.carbs}g</p>
+        <p>Protein: {data.protein}g</p>
       </div>
     );
   }
