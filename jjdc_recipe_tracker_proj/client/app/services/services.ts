@@ -36,23 +36,23 @@ export const searchUserData = (query: string): Promise<User[]> => {
 
 // just use a simple axios.post?
 // this is for sending the registering request to the api
-export const register = (userID: string, pass: string, username: string): Promise<User> => {
+export const register = (userID: string, pass: string, username: string): Promise<void> => {
   console.log(BASE_URL);
-  let newUser = {}
-  return httpClient.post('/api/balancebites', {
-    params: {
-      userid: userID,
-      password: pass,
-      name: username,
-    }
-  }).then((response) => response.data);
+  let newUser: User = { 
+    UserID: userID, 
+    Password: pass,
+    Name: username};
+  console.log(newUser)
+  return httpClient.post('/api/balancebites/register', newUser).then((response) => response.data);
 }
 
 // This is for sending the login info to the api to check if things match.
-export const login = () => {
-  httpClient.post('/api/balancebites', {
-    
-  })
+export const login = (userID: string, pass: string): Promise<User[]> => {
+  console.log("logging in user")
+  return httpClient.post('/api/balancebites/login', {
+    UserID: userID,
+    Password: pass,
+  }).then((response) => response.data);
 }
 
 export const searchRecipeData = (query: string): Promise<Recipe[]> => {
