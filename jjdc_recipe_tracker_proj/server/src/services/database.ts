@@ -1,6 +1,7 @@
 import pool from "./connection";
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user";
+import { MealPlan } from "../models/mealPlan";
 
 // Before we add sql commands
 
@@ -44,7 +45,11 @@ export async function getUserMacros(UserID: string): Promise<any> {
     const result = await pool.query(sqlQuery);
     return result[0];
 }
-  
+export async function addMealPlan(UserID: string): Promise<any> {
+    const selectRecipesQuery = `SELECT RecipeID FROM Recipes WHERE UserID = '${UserID}'`
+    const [result] = await pool.query(selectRecipesQuery);
+    return result;
+}
 // export async function deletePokemonSpawnbyID(spawnID: number): Promise<void> {
 //     const sqlQuery = `DELETE FROM pokemon_spawn WHERE spawnID = ${spawnID};`;
 //     await pool.query(sqlQuery);

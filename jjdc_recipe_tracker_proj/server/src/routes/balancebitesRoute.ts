@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getUserByUserID, getUserMacros, addUser} from "../services/database";
+import { getAllUser, getUserByUserID, getUserMacros, addUser, addMealPlan} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -51,6 +51,16 @@ router.get("/macros", async (req: Request, res: Response) => {
     const userId = 'aabrahmovicio6';
     try {
         const macros = await getUserMacros(userId);
+        console.log(macros);
+        res.status(201).json(macros);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching macros" });
+    }
+});
+router.get("/meal", async (req: Request, res: Response) => {
+    const userId = 'aabrahmovicio6';
+    try {
+        const macros = await addMealPlan(userId);
         console.log(macros);
         res.status(201).json(macros);
     } catch (error) {
