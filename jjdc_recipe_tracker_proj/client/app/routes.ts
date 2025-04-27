@@ -4,7 +4,10 @@ import { route } from "@react-router/dev/routes";
 export default [
     index("routes/home.tsx"),
     route("/register", "routes/register.tsx"),
-    route("/graph", "routes/graph.tsx")
+    route("/graph", "routes/graph.tsx"),
+    route("/login", "routes/login.tsx"),
+    route("/recipe", "routes/recipe.tsx"),
+    route("/searchRecipe/:RecipeID", "routes/searchRecipe.tsx")
 ] satisfies RouteConfig;
 
 

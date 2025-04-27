@@ -9,5 +9,10 @@ declare module "react-router" {
 type Params = {
   "/": {};
   "/register": {};
+  "/login": {};
+  "/recipe": {};
   "/graph": {};
+  "/searchRecipe/:RecipeID": {
+    "RecipeID": string;
+  };
 };

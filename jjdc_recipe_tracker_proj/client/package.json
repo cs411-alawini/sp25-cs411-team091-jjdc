@@ -2,12 +2,12 @@
   "name": "client",
   "private": true,
   "type": "module",
-  "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
-  },
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "typecheck": "react-router typegen && tsc"
+},
   "dependencies": {
     "@heroui/react": "^2.7.6",
     "@react-router/node": "^7.5.0",
@@ -19,8 +19,7 @@
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router": "^7.5.0",
-    "react-router-dom": "^7.5.1",
-    "recharts": "^2.15.3"
+    "react-router-dom": "^7.5.2"
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.0",

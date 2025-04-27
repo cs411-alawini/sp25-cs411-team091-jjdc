@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getUserByUserID, getUserMacros, addUser, addMealPlan} from "../services/database";
+import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, addMealPlan} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -35,16 +35,39 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/register", async (req: Request, res: Response) => {
     const newUser: User = req.body;
-    if (!req.query.search) {
-
+    console.log("running register")
+    try {
+        const user = await addUser(newUser);
+        res.status(201).json(user);
+    } catch (error) {
+        res.status(500).json({ message: "Error Adding User" });
     }
-    else {
-        try {
-            const user = await addUser(newUser);
-            res.status(201).json(user);
-        } catch (error) {
-            res.status(500).json({ message: "Error adding User" });
-        }
+});
+
+router.post("/login", async (req: Request, res: Response) => {
+    // code for getting the user? If the user exists with a specified id and password, good, otherwise bad
+    // need to write a new SQL query for this.
+    const loginInfo = req.body
+    try {
+        const correctUser: User[] = await getUserByLogin(loginInfo.UserID, loginInfo.Password)
+        console.log(correctUser)
+        res.status(201).json(correctUser);
+    } catch (error) {
+        res.status(500).json({ message: "Error User Doesn't Exist" });
+    }
+});
+
+
+router.post("/login", async (req: Request, res: Response) => {
+    // code for getting the user? If the user exists with a specified id and password, good, otherwise bad
+    // need to write a new SQL query for this.
+    const loginInfo = req.body
+    try {
+        const correctUser: User[] = await getUserByLogin(loginInfo.UserID, loginInfo.Password)
+        console.log(correctUser)
+        res.status(201).json(correctUser);
+    } catch (error) {
+        res.status(500).json({ message: "Error User Doesn't Exist" });
     }
 });
 router.get("/macros", async (req: Request, res: Response) => {
@@ -67,6 +90,28 @@ router.get("/meal", async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error fetching macros" });
     }
 });
+router.get("/macros", async (req: Request, res: Response) => {
+    const userId = 'aabrahmovicio6';
+    try {
+        const macros = await getUserMacros(userId);
+        console.log(macros);
+        res.status(201).json(macros);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching macros" });
+    }
+});
+router.get("/meal", async (req: Request, res: Response) => {
+    const userId = 'aabrahmovicio6';
+    try {
+        const macros = await addMealPlan(userId);
+        console.log(macros);
+        res.status(201).json(macros);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching macros" });
+    }
+});
+
+
 
 
 
