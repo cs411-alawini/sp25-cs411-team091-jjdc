@@ -24,12 +24,12 @@ export async function getUserByUserID(UserID: string): Promise<User[]> {
 }
 
 export async function addUser(NewUser: User): Promise<void> {
-    const sqlQuery = `INSERT INTO UserInfo (UserID, Password, Name) VALUES (${NewUser.UserID}, '${NewUser.Password}', ${NewUser.Name});`;
+    const sqlQuery = `INSERT INTO UserInfo (UserID, Password, Name) VALUES ('${NewUser.UserID}', '${NewUser.Password}', '${NewUser.Name}');`;
     await pool.query(sqlQuery);
 }
 
 export async function updateUserID(User: User): Promise<void> {
-    const sqlQuery = `UPDATE UserInfo SET Password = ${User.Password}, Name = '${User.Name}' WHERE UserID = ${User.UserID};`;
+    const sqlQuery = `UPDATE UserInfo SET Password = '${User.Password}', Name = '${User.Name}' WHERE UserID = '${User.UserID}';`;
     await pool.query(sqlQuery);
 }
   

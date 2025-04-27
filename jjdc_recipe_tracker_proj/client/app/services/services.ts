@@ -9,6 +9,12 @@ export interface User {
   Name: string;
 }
 
+export interface Recipe {
+  RecipeID: number;
+  Name: string;
+  UserID: string;
+  Public: boolean;
+}
 
 export const httpClient = axios.create({
     baseURL: BASE_URL,
@@ -48,5 +54,15 @@ export const login = () => {
     
   })
 }
+
+export const searchRecipeData = (query: string): Promise<Recipe[]> => {
+  console.log(BASE_URL);
+  // console.log("heeyyy")
+  return httpClient
+    .get(`/api/recipe`, {
+      params: { search: query },
+    })
+    .then((response) => response.data);
+};
 
 
