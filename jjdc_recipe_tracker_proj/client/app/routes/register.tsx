@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { register, searchUserData } from "~/services/services";
 import { Form, useActionData, data, redirect } from "react-router";
 import { Button, Card, CardBody, Input, user } from "@heroui/react";
@@ -65,7 +64,6 @@ export function meta() {
 
 export default function Register() {
 
-    const [loginStatus, setLoginStatus] = useState("");
     const data = useActionData();
 
 

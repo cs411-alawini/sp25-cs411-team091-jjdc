@@ -58,3 +58,7 @@ export async function addRecipe(NewRecipe: Recipe): Promise<void> {
     const result = await pool.query(sqlQuery);
     console.log(result)
 }
+
+export async function addRecipeIngredients() {
+    
+}
