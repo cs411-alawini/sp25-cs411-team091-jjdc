@@ -16,6 +16,19 @@ export interface Recipe {
   Public: boolean;
 }
 
+export interface Ingredients {
+  RecipeID: number;
+  FoodName: string;
+  Quantity: number;
+}
+
+export interface Nutritions{
+  sumCalories: number;
+  sumFat: number;
+  sumCarbohydrates: number;
+  sumProtein: number;
+}
+
 export const httpClient = axios.create({
     baseURL: BASE_URL,
     headers: {
@@ -65,4 +78,30 @@ export const searchRecipeData = (query: string): Promise<Recipe[]> => {
     .then((response) => response.data);
 };
 
+export const getRecipeByID = (id: number): Promise<Recipe> => {
+  return httpClient
+      .get(`/api/recipe/${id}`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
+
+export const getFoodsInRecipeByID = (id: number): Promise<Ingredients[]> => {
+  return httpClient
+      .get(`/api/recipe/ingredients/${id}`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
+
+export const getNutritionsInRecipeByID = (id: number): Promise<Nutritions> => {
+  return httpClient
+      .get(`/api/recipe/nutritions/${id}`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
 

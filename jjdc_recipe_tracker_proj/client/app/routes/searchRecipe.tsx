@@ -1,6 +1,6 @@
 import type { Route } from "./+types/home";
 import { UserSearching } from "../pages/recipe/recipePage"
-import { searchRecipePage } from "../pages/recipe/searchRecipe"
+import { SearchRecipePage } from "../pages/recipe/searchRecipe"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,5 +10,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <searchRecipePage />;
+  return <SearchRecipePage />;
 }
+
+
+
