@@ -56,6 +56,12 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
       <NavbarItem>
         <p className="font-semibold text-white">Signed in as {user.UserID} (Name: {user.Name})</p>
       </NavbarItem> 
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/recipe"> 
+          Recipes
+        </Link>
+      </NavbarItem>
+
 
       <NavbarItem>
         {/* <Button className="text-white" color="danger" onPress={async () => {
