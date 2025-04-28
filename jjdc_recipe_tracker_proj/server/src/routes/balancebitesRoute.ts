@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getUserByUserID, addUser, getUserByLogin} from "../services/database";
+import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, searchRecipes, addMealPlan, addMealPlanRecipes, getUserNutritionStats, addNutritionLog} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -57,6 +57,65 @@ router.post("/login", async (req: Request, res: Response) => {
     }
 });
 
+router.get("/nutritionstats", async (req: Request, res: Response) => {
+    const userId = 'aabrahmovicio6';
+    try {
+        console.log("In stats");
+        const stats = await getUserNutritionStats(userId);
+        console.log(stats);
+        res.status(201).json(stats);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching macros" });
+    }
+});
 
+router.post("/nutritionlog", async (req: Request, res: Response) => {
+    const nutritionlog = req.body;
+    try {
+        const Log = await addNutritionLog(nutritionlog);
+        res.status(201).json(Log);
+    } catch (error) {
+        res.status(500).json({ message: "Error creating nutrition log" });
+    }
+});
+
+router.get("/macros", async (req: Request, res: Response) => {
+    const userId = 'aabrahmovicio6';
+    try {
+        const macros = await getUserMacros(userId);
+        console.log(macros);
+        res.status(201).json(macros);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching macros" });
+    }
+});
+
+router.get("/search/recipes", async (req: Request, res: Response) => {
+    const { searchTerm, userID } = req.query;
+    try {
+        const recipes = await searchRecipes(searchTerm as string, userID as string);
+        res.status(201).json(recipes);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching recipes" });
+    }
+});
+router.post("/meal", async (req: Request, res: Response) => {
+    const { userID, name, isPublic } = req.body;
+    try {
+        const mealPlanID = await addMealPlan(userID, name, isPublic);
+        res.status(201).json(mealPlanID);
+    } catch (error) {
+        res.status(500).json({ message: "Error creating meal plan" });
+    }
+});
+router.post("/meal/recipes", async (req: Request, res: Response) => {
+    const { mealPlanID, recipes } = req.body;
+    try {
+        await addMealPlanRecipes(mealPlanID, recipes);
+        res.status(201).json();
+    } catch (error) {
+        res.status(500).json({ message: "Error adding to meal plan recipes" });
+    }
+});
 
 export default router;

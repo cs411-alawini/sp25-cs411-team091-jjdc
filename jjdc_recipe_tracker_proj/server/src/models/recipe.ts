@@ -17,3 +17,9 @@ export interface Nutritions{
     sumCarbohydrates: number;
     sumProtein: number;
 }
+
+export interface Log{
+    UserID: string;
+    Time: Date;
+    RecipeID: number;
+}
