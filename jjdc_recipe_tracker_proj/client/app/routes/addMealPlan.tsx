@@ -8,7 +8,7 @@ function SimpleRecipeSearch() {
   const [selectedRecipes, setSelectedRecipes] = useState<number[]>([]);
   const [mealPlanName, setMealPlanName] = useState('');
   const [isPublic, setIsPublic] = useState(true);
-  const [userID] = useState('490');
+  const [userID] = useState('aabrahmovicio6');
   const [selectedRecipeNames, setSelectedRecipeNames] = useState<Map<number, string>>(new Map());
   const fetchRecipes = async (searchTerm: string) => {
     try {
@@ -50,20 +50,14 @@ function SimpleRecipeSearch() {
   const handleMealPlanCreation = async () => {
     try {
       console.log('Creating meal plan with name:', mealPlanName, 'and visibility:', isPublic);
-      const mealPlanResponse = await axios.post('http://localhost:3007/api/balancebites/meal', {
+      console.log('Number of recipes:', selectedRecipes.length);
+      await axios.post('http://localhost:3007/api/balancebites/meal', {
         userID,
         name: mealPlanName,
         isPublic,
-      });
-
-      const mealPlanID = mealPlanResponse.data.mealPlanID;
-
-      await axios.post('http://localhost:3007/api/balancebites/meal/recipes', {
-        mealPlanID,
         recipes: selectedRecipes,
       });
-
-      alert('Meal plan created successfully!');
+      alert('Created meal plan successfully!');
     } catch (error) {
       console.error('Error creating meal plan:', error);
       alert('Error creating meal plan');
