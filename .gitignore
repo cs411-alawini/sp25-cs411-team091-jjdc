@@ -6,6 +6,7 @@
 /build/
 */*/node_modules
 
+jjdc_recipe_tracker_proj/client/node_modules/
 balancebites/radiant-century-452018-d7-740fc54b4aa0.json
 jjdc_recipe_tracker_proj/client/node_modules/.bin/beautify
 jjdc_recipe_tracker_proj/client/node_modules/.bin/browserslist
@@ -344,3 +345,4 @@ jjdc_recipe_tracker_proj/client/node_modules/esbuild/bin/esbuild
 jjdc_recipe_tracker_proj/client/node_modules/lightningcss-linux-x64-gnu/LICENSE
 jjdc_recipe_tracker_proj/client/node_modules/lightningcss-linux-x64-gnu/lightningcss.linux-x64-gnu.node
 jjdc_recipe_tracker_proj/client/node_modules/lightningcss-linux-x64-gnu/package.json
+*.js

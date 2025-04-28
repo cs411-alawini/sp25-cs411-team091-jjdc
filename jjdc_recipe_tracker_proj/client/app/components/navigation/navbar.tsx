@@ -54,12 +54,12 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
   return (
     <NavbarContent justify="end">
       <NavbarItem>
-        <p className="font-semibold">Signed in as {user.UserID} (Name: {user.Name})</p>
+        <p className="font-semibold text-white">Signed in as {user.UserID} (Name: {user.Name})</p>
       </NavbarItem> 
 
       <NavbarItem>
-        <Button className="text-red" onPress={async () => {
-          
+        <Button className="text-white" color="danger" onPress={async () => {
+
         }}>
           Logout
         </Button>
