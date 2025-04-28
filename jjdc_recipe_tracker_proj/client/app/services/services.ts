@@ -105,3 +105,14 @@ export const getNutritionsInRecipeByID = (id: number): Promise<Nutritions> => {
       });
 };
 
+export const addrecipe = (recipeid: number, name: string, userid: string, publicr: boolean): Promise<void> => {
+  console.log(BASE_URL);
+  let NewRecipe: Recipe = { 
+    RecipeID: recipeid,
+    Name: name,
+    UserID: userid, 
+    Public: publicr};
+  console.log(NewRecipe)
+  return httpClient.post('/api/recipe/addrecipe', NewRecipe).then((response) => response.data);
+}
+
