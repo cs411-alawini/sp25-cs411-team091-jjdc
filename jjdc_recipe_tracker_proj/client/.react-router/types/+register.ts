@@ -10,4 +10,6 @@ type Params = {
   "/": {};
   "/register": {};
   "/login": {};
+  "/logout": {};
+  "/recipe": {};
 };

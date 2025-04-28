@@ -27,7 +27,7 @@ export function StickyNavbar({ user }: { user: User }) {
     };
     return (
         <Navbar className="dark bg-black" onMenuOpenChange={setIsMenuOpen}>
-            <NavbarContent justify="start">
+            {/* <NavbarContent justify="start">
                 <NavbarBrand>
                     <img
                     src="/assets/images/leaves.png"
@@ -45,7 +45,7 @@ export function StickyNavbar({ user }: { user: User }) {
                     <span style={{ color: "#ffd200" }}>R</span>
                     </div>
                 </NavbarBrand>
-            </NavbarContent>
+            </NavbarContent> */}
 
             <NavbarContent as="div" justify="end">
                 {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
