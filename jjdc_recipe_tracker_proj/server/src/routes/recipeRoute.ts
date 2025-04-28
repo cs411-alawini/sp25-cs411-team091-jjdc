@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { getAllUser, getUserByUserID, addUser} from "../services/database";
 import { User } from "../models/user";
 import { Recipe } from "../models/recipe";
-import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID } from "../services/recipe";
+import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID, addRecipe } from "../services/recipe";
 
 const router = Router();
 
@@ -69,6 +69,17 @@ router.get("/nutritions/:id", async (req: Request, res: Response) => {
       }
     } catch (error) {
       res.status(500).json({ message: "Error fetching nutritions" });
+    }
+});
+
+router.post("/addrecipe", async (req: Request, res: Response) => {
+    const NewRecipe: Recipe = req.body;
+    console.log("running add recipe")
+    try {
+        const recipe = await addRecipe(NewRecipe);
+        res.status(201).json(recipe);
+    } catch (error) {
+        res.status(500).json({ message: "Error Adding Recipe" });
     }
 });
 

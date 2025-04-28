@@ -52,8 +52,7 @@ const RecipeForm: React.FC<recipeFormProps> = ({ onClose }) => {
                             placeholder="Enter the recipe name"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         />
-                        {/* {isResolving && <p className="text-sm text-gray-500 mt-1">Resolving address...</p>}
-                        {error && <p className="text-sm text-red-500 mt-1">{error}</p>} */}
+                        
 
 
                         <div className="mt-6 flex justify-end gap-x-2">
