@@ -2,6 +2,7 @@ import pool from "./connection";
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user";
 import { Log } from "../models/recipe";
+import { MealPlan } from "../models/mealPlan";
 
 
 // Before we add sql commands
