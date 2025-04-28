@@ -72,10 +72,14 @@ export async function searchRecipes(searchTerm: string, UserID: string): Promise
     const [result] = await pool.query(sqlQuery);
     return result;
 }
-export async function addMealPlan(UserID: string, Name: string, Public: boolean): Promise<any> {
-    const callProcedure = `CALL CreateMealPlanTransaction('${UserID}', '${Name}', ${Public});`;
-    const result = await pool.query(callProcedure);
-    return result[0]; 
+
+export async function getUserNutritionStats(userId: string): Promise<any> {
+    const [rows] = await pool.query('CALL GetUserNutritionStats(?)', [userId]);
+    // Stored procedures in MySQL2 return [[result1], [result2], ...]
+    // const todayStats = rows[0];
+    // const weeklyAvgStats = rows[1];
+
+    return rows;
 }
 export async function addMealPlanRecipes(MealPlanID: number, recipes: number[]): Promise<void> {
     for (const recipeID of recipes) {
@@ -83,6 +87,12 @@ export async function addMealPlanRecipes(MealPlanID: number, recipes: number[]):
         await pool.query(addMealPlanQuery);
     }
 }
+export async function addMealPlan(UserID: string, Name: string, Public: boolean): Promise<any> {
+    const callProcedure = `CALL CreateMealPlanTransaction('${UserID}', '${Name}', ${Public});`;
+    const result = await pool.query(callProcedure);
+    return result[0]; 
+}
+  
 // export async function deletePokemonSpawnbyID(spawnID: number): Promise<void> {
 //     const sqlQuery = `DELETE FROM pokemon_spawn WHERE spawnID = ${spawnID};`;
 //     await pool.query(sqlQuery);

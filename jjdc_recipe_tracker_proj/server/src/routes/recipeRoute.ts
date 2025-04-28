@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { getAllUser, getUserByUserID, addUser} from "../services/database";
 import { User } from "../models/user";
 import { Recipe } from "../models/recipe";
-import { getAllRecipe, getRecipeByName } from "../services/recipe";
+import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID, addRecipe } from "../services/recipe";
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router.get("/", async (req: Request, res: Response) => {
             const allRecipe: Recipe[] = await getAllRecipe();
             res.status(200).json(allRecipe);
         } catch (error) {
-            res.status(500).json({ message: "Error fetching Users" });
+            res.status(500).json({ message: "Error fetching all Recipe" });
         }
     }
     else {
@@ -26,6 +26,60 @@ router.get("/", async (req: Request, res: Response) => {
         } catch (error) {
             res.status(500).json({ message: "Error fetching Recipe by name" });
         }
+    }
+});
+
+// api/recipe/1
+router.get("/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    try {
+      const recipe = await getRecipeByID(id);
+      if (recipe) {
+        res.status(200).json(recipe);
+      } else {
+        res.status(404).json({ message: `No Recipe found with ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching Recipe" });
+    }
+});
+
+router.get("/ingredients/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    try {
+      const ingredients = await getFoodsInRecipeByID(id);
+      if (ingredients) {
+        res.status(200).json(ingredients);
+      } else {
+        res.status(404).json({ message: `No Ingredients found with Recipe ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching Ingredients" });
+    }
+});
+
+router.get("/nutritions/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    try {
+      const nutritions = await getNutritionInRecipeByID(id);
+      if (nutritions) {
+        res.status(200).json(nutritions);
+      } else {
+        res.status(404).json({ message: `No nutritions found with Recipe ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching nutritions" });
+    }
+});
+
+router.post("/addrecipe", async (req: Request, res: Response) => {
+    const NewRecipe: Recipe = req.body;
+    console.log("running add recipe")
+    try {
+        const recipe = await addRecipe(NewRecipe);
+        res.status(201).json(recipe);
+    } catch (error) {
+        res.status(500).json({ message: "Error Adding Recipe" });
     }
 });
 

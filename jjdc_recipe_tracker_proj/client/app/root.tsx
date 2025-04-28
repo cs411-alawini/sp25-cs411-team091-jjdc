@@ -5,10 +5,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "react-router";
-
+import { StickyNavbar } from "./components/navigation/navbar";
 import type { Route } from "./+types/root";
 import "./app.css";
+import { getLoggedInUser } from "./services/sessions.server";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,8 +43,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export async function loader({ request }: { request: Request }) {
+  const user = await getLoggedInUser(request);
+  return user;
+}
+
+function NavbarLoader() {
+  const user = useLoaderData();
+  return <StickyNavbar user={user}/>
+}
+
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <div>
+        <NavbarLoader />
+      </div>
+      <div id="detail">
+        <Outlet />
+      </div>
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/recipe/searchBar";
 import RecipeList from "../../components/recipe/recipeList";
+import RecipeForm from "~/components/recipe/recipeForm";
 import { searchUserData, type User , type Recipe , searchRecipeData} from "../../services/services";
 import { useParams } from "react-router";
 
 export function UserSearching() {
     const [searchQuery, setSearchQuery] = React.useState("");
     const [recipeData, setRecipeData] = React.useState<Recipe[]>([]);
+    const [isFormVisible, setIsFormVisible] = React.useState(false);
+    const [recipeInformationToEdit, setRecipeInformationToEdit] = React.useState<Recipe | null>(null);
 
     const handleSearch = (query: string) => {
         console.log(query)
         setSearchQuery(query);
     }
+
+    const handleAddNewRecipe = () => {
+        setRecipeInformationToEdit(null);
+        setIsFormVisible(true);
+    };
 
     useEffect(() => {
         const fetchData = async() => {
@@ -43,6 +51,15 @@ export function UserSearching() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-12 lg:px-8">
                  <SearchBar onSearch={handleSearch}/>
+
+                 <div className="flex space-x-4">
+                    <button 
+                        onClick={handleAddNewRecipe}
+                        className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                        + New
+                    </button>
+                 </div>
+
                  <div className="mt-6 py-10 sm:py-15">
                      <RecipeList recipeData={recipeData} />
                  </div>
@@ -51,6 +68,12 @@ export function UserSearching() {
             {/* <div className="mt-6 py-10 sm:py-15">
                 <UserList userData={userData} />
             </div> */}
+
+            {
+                isFormVisible && (
+                    <RecipeForm onClose={()=> setIsFormVisible(false)}/>
+                )
+            }
         </div>
     );
 }

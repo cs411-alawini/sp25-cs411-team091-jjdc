@@ -1,23 +1,30 @@
 import {
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownTrigger,
-    Link,
-    Navbar,
-    NavbarBrand,
-    NavbarContent,
-    NavbarItem,
-    NavbarMenu,
-    NavbarMenuItem,
-    NavbarMenuToggle,
+  Button,
+  Link,
+  Navbar,
+  NavbarContent,
+  NavbarItem,
 } from "@heroui/react"
 import type { User } from "../../services/services";
-import "tailwindcss/tailwind.css";
 import { useState } from "react";
+import { Form, redirect } from "react-router";
 
-export function StickyNavbar({ user }: { user: User }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+export async function action({ request }: { request: Request }) {
+  // const test = getCurrentUserID(request)
+  // const session = await getSession(
+  //   request.headers.get("Cookie")
+  // );
+
+  // return redirect("/", {
+  //   headers: {
+  //     "Set-Cookie": await destroySession(session),
+  //   },
+  // });
+}
+
+export function StickyNavbar({ user }: { user: Omit<User, "Password"> }) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false); //  onMenuOpenChange={setIsMenuOpen}
     const menuItems = {
       Home: "/",
       Recipes: "/recipes",
@@ -26,99 +33,65 @@ export function StickyNavbar({ user }: { user: User }) {
       creation: "/roots",
     };
     return (
-        <Navbar className="dark bg-black" onMenuOpenChange={setIsMenuOpen}>
-            <NavbarContent justify="start">
-                <NavbarBrand>
-                    <img
-                    src="/assets/images/leaves.png"
-                    alt="Brand Logo"
-                    className="h-8 w-8 mr-2"
-                    />
-                    <div className="hidden xm:block font-bold">
-                    <span style={{ color: "#e21833" }}>Roots</span>{" "}
-                    <span className="text-gray-400">and</span>{" "}
-                    <span style={{ color: "#ffd200" }}>Routes</span>
-                    </div>
-                    <div className="block xm:hidden font-bold">
-                    <span style={{ color: "#e21833" }}>R</span>
-                    <span className="text-gray-400">a</span>
-                    <span style={{ color: "#ffd200" }}>R</span>
-                    </div>
-                </NavbarBrand>
+        <Navbar className="dark bg-black">
+            <NavbarContent className="hidden md:flex gap-4" justify="center">
+              <NavbarItem>
+                <Link className="text-white" color="primary" href="/"> 
+                  Home
+                </Link>
+              </NavbarItem> 
             </NavbarContent>
 
-            <NavbarContent as="div" justify="end">
+            {/* <NavbarContent as="div" justify="end">
                 {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
-            </NavbarContent>
+            </NavbarContent> */}
+            {user ? <UserLoggedIn user={user} /> : <UserNotLoggedIn />}
         </Navbar>
     )
 }
 
-function LoggedIn({ user }: { user: User }) {
-    return (
-      <Dropdown placement="bottom-end">
-        <DropdownTrigger>
-          <img
-            src="/assets/images/avatar.png"
-            alt="Profile Picture"
-            className="h-8 w-8 rounded-full border-blue-400 border-1.5"
-          />
-        </DropdownTrigger>
-        <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-12 gap-2" href="/profile">
-            <p className="font-semibold">Signed in as {user.UserID}</p>
-          </DropdownItem>
-          <DropdownItem
-            onClick={async () => {
-              try {
-                const response = await fetch("/logout", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  credentials: "include",
-                });
-  
-                if (!response.ok) {
-                  throw new Error("Failed to log out");
-                }
-  
-                if (response.redirected) {
-                  window.location.href = response.url;
-                }
-              } catch (error: any) {
-                console.error("Logout error:", error.message);
-              }
-            }}
-            key="logout"
-            color="danger"
-          >
-            Log Out
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    );
+function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
+  return (
+    <NavbarContent justify="end">
+      <NavbarItem>
+        <p className="font-semibold text-white">Signed in as {user.UserID} (Name: {user.Name})</p>
+      </NavbarItem> 
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/recipe"> 
+          Recipes
+        </Link>
+      </NavbarItem>
+
+
+      <NavbarItem>
+        {/* <Button className="text-white" color="danger" onPress={async () => {
+
+        }}>
+          Logout
+        </Button> */}
+        <Link className="text-white" href="/logout"> 
+          Logout
+        </Link>
+      </NavbarItem>
+    </NavbarContent>
+  )
 }
 
-function NotLoggedIn() {
-    return (
-      <Dropdown placement="left">
-        <DropdownTrigger>
-          <img
-            src="/assets/images/avatar.png"
-            alt="Profile Picture"
-            className="h-8 w-8 rounded-full border-blue-400 border-1.5"
-          />
-        </DropdownTrigger>
-        <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="login" href="/login">
-            Login
-          </DropdownItem>
-          <DropdownItem key="register" href="/register">
-            Register
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    );
+function UserNotLoggedIn() {
+  return (
+    <NavbarContent justify="end">
+    <NavbarItem>
+      <Link className="text-white" href="/login"> 
+        Login
+      </Link>
+    </NavbarItem>
+    <NavbarItem>
+      <Link className="text-white" href="/register"> 
+        Register
+      </Link>
+    </NavbarItem>
+  </NavbarContent>
+  )
 }
+
 

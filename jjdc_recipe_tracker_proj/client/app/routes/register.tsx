@@ -48,7 +48,8 @@ export async function action({ request } : { request: Request }) {
     try {
         const newUser = await register(userID, password, username);
         console.log("worked?")
-        return { success: "User successfully created" }
+        
+        return redirect("/")  //{ success: "User successfully created" }
     } catch (error) {
         
     }
