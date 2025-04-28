@@ -58,11 +58,14 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
       </NavbarItem> 
 
       <NavbarItem>
-        <Button className="text-white" color="danger" onPress={async () => {
+        {/* <Button className="text-white" color="danger" onPress={async () => {
 
         }}>
           Logout
-        </Button>
+        </Button> */}
+        <Link className="text-white" href="/logout"> 
+          Logout
+        </Link>
       </NavbarItem>
     </NavbarContent>
   )
