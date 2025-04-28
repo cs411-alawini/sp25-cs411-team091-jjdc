@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { getAllUser, getUserByUserID, addUser} from "../services/database";
 import { User } from "../models/user";
 import { Recipe } from "../models/recipe";
-import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID, addRecipe } from "../services/recipe";
+import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID, addRecipe, getMaxRecipeID } from "../services/recipe";
 
 const router = Router();
 
@@ -80,6 +80,20 @@ router.post("/addrecipe", async (req: Request, res: Response) => {
         res.status(201).json(recipe);
     } catch (error) {
         res.status(500).json({ message: "Error Adding Recipe" });
+    }
+});
+
+router.get("/maxrecipe", async (req: Request, res: Response) => {
+    // const id = parseInt(req.params.id);
+    try {
+      const maxID = await getMaxRecipeID();
+      if (maxID) {
+        res.status(200).json(maxID);
+      } else {
+        res.status(404).json({ message: `No Max Recipe ID found` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching Max Recipe ID" });
     }
 });
 

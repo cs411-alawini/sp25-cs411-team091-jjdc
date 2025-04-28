@@ -51,6 +51,15 @@ export async function getNutritionInRecipeByID(RecipeID: number): Promise<Nutrit
     return rows as Nutritions[];
 };
 
+export async function getMaxRecipeID(): Promise<number> {
+    console.log("Getting the max recipeID")
+    // const queryName = RecipeID;//.toLowerCase();
+    const sqlQuery = `SELECT MAX(RecipeID) AS maxID FROM BalanceBites.Recipes;`;
+    const maxID = await pool.query(sqlQuery);
+    // console.log(rows)
+    return maxID as unknown as number;
+};
+
 export async function addRecipe(NewRecipe: Recipe): Promise<void> {
     // console.log(NewRecipe)
     const sqlQuery = `INSERT INTO BalanceBites.Recipes (RecipeID, Name, UserID, Public) VALUES ('${NewRecipe.RecipeID}', '${NewRecipe.Name}', '${NewRecipe.UserID}', '${NewRecipe.Public}');`;

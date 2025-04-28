@@ -1,6 +1,7 @@
 import pool from "./connection";
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user";
+import { Log } from "../models/recipe";
 
 
 // Before we add sql commands
@@ -64,13 +65,45 @@ export async function getUserNutritionStats(userId: string): Promise<any> {
     return rows;
 }
 
+export async function addNutritionLog(NewLog: Log): Promise<void> {
+    console.log(NewLog)
+    const now: Date = new Date();
+    console.log(now.toISOString().slice(0, 19).replace('T', ' '));
+    const date_to_put = now.toISOString().slice(0, 19).replace('T', ' ');
+    const sqlQuery = `INSERT INTO BalanceBites.NutritionLog (UserID, Time, RecipeID) VALUES ('${NewLog.UserID}', ${NewLog.Time}, ${NewLog.RecipeID});`;
+    console.log("after adding nutritionLog")
+    const result = await pool.query(sqlQuery);
+    console.log(result)
+}
+
+export async function getUserMacros(UserID: string): Promise<any> {
+    const sqlQuery = `SELECT DAYNAME(Time) as dayOfWeek, SUM(Calories) AS sumCalories, SUM(Fat) AS sumFat, SUM(Carbohydrates) AS sumCarbohydrates, SUM(Protein) AS sumProtein
+    FROM Foods NATURAL JOIN (SELECT FoodName, Time
+        FROM Ingredients JOIN NutritionLog USING (RecipeID)
+        WHERE UserID = '${UserID}') AS userDailyRecipes
+        GROUP BY 
+            dayOfWeek
+        ORDER BY
+            dayOfWeek`;
+    const result = await pool.query(sqlQuery);
+    return result[0];
+}
+export async function searchRecipes(searchTerm: string, UserID: string): Promise<any> {
+    const sqlQuery = `SELECT RecipeID AS id, Name AS name FROM Recipes WHERE (Public = true OR UserID = '${UserID}') AND Name like '%${searchTerm}%'`;
+    const [result] = await pool.query(sqlQuery);
+    return result;
+}
 export async function addMealPlan(UserID: string, Name: string, Public: boolean): Promise<any> {
     const callProcedure = `CALL CreateMealPlanTransaction('${UserID}', '${Name}', ${Public});`;
     const result = await pool.query(callProcedure);
     return result[0]; 
 }
-
-
+export async function addMealPlanRecipes(MealPlanID: number, recipes: number[]): Promise<void> {
+    for (const recipeID of recipes) {
+        const addMealPlanQuery = `INSERT INTO MealPlanRecipes(MealPlanID, RecipeID) VALUES ('${MealPlanID}', '${recipeID}')`;
+        await pool.query(addMealPlanQuery);
+    }
+}
 
 
   
