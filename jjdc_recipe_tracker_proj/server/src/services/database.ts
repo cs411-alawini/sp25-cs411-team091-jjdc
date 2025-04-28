@@ -54,6 +54,25 @@ export async function updateUserID(User: User): Promise<void> {
     const sqlQuery = `UPDATE BalanceBites.UserInfo SET Password = ${User.Password}, Name = '${User.Name}' WHERE UserID = '${User.UserID}';`;
     await pool.query(sqlQuery);
 }
+
+export async function getUserNutritionStats(userId: string): Promise<any> {
+    const [rows] = await pool.query('CALL GetUserNutritionStats(?)', [userId]);
+    // Stored procedures in MySQL2 return [[result1], [result2], ...]
+    // const todayStats = rows[0];
+    // const weeklyAvgStats = rows[1];
+
+    return rows;
+}
+
+export async function addMealPlan(UserID: string, Name: string, Public: boolean): Promise<any> {
+    const callProcedure = `CALL CreateMealPlanTransaction('${UserID}', '${Name}', ${Public});`;
+    const result = await pool.query(callProcedure);
+    return result[0]; 
+}
+
+
+
+
   
 // export async function deletePokemonSpawnbyID(spawnID: number): Promise<void> {
 //     const sqlQuery = `DELETE FROM pokemon_spawn WHERE spawnID = ${spawnID};`;
