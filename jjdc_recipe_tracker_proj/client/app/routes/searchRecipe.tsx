@@ -9,8 +9,9 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Home() {
-  return <SearchRecipePage />;
+
+export default function RecipeSearch() {
+  return <SearchRecipePage/>;
 }
 
 

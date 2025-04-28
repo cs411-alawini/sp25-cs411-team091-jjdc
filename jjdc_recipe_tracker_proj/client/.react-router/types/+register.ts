@@ -10,6 +10,7 @@ type Params = {
   "/": {};
   "/register": {};
   "/login": {};
+  "/logout": {};
   "/recipe": {};
   "/searchRecipe/:RecipeID": {
     "RecipeID": string;

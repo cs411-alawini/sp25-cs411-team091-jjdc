@@ -10,6 +10,7 @@ export async function loader({ request }: { request: Request }) {
     const user = await getCurrentUserID(request);
 
     if (user) {
+        console.log(user)
         console.log("redirect to home")
         return redirect("/");
     }
@@ -68,11 +69,12 @@ export default function Login() {
           <CardBody>
             <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
             <Form method="post">
-                <div className="flex flex-col gap-4 max-w-md">
+                <div className="flex flex-col gap-4">
                     <Input 
                         type="text" 
                         placeholder="Username" 
                         name="username" 
+                        size="md"
                         isRequired
                         />
                         
@@ -80,6 +82,7 @@ export default function Login() {
                         type="password" 
                         placeholder="Password" 
                         name="password" 
+                        size="md"
                         isRequired
                         />
                     {data?.error && (
