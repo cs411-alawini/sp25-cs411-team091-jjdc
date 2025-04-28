@@ -4,5 +4,6 @@
 # React Router
 /.react-router/
 /build/
+*/*/node_modules
 
 balancebites/radiant-century-452018-d7-740fc54b4aa0.json
