@@ -13,7 +13,7 @@ export async function action({ request }: { request: Request }) {
       request.headers.get("Cookie")
     );
 
-    return redirect("/login", {
+    return redirect("/", {
       headers: {
         "Set-Cookie": await destroySession(session),
       },
