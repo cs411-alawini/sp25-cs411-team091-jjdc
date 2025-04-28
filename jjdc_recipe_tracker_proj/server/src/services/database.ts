@@ -67,10 +67,21 @@ export async function getUserMacros(UserID: string): Promise<any> {
     const result = await pool.query(sqlQuery);
     return result[0];
 }
-export async function addMealPlan(UserID: string): Promise<any> {
-    const selectRecipesQuery = `SELECT RecipeID FROM Recipes WHERE UserID = '${UserID}'`
-    const [result] = await pool.query(selectRecipesQuery);
+export async function searchRecipes(searchTerm: string, UserID: string): Promise<any> {
+    const sqlQuery = `SELECT RecipeID AS id, Name AS name FROM Recipes WHERE (Public = true OR UserID = '${UserID}') AND Name like '%${searchTerm}%'`;
+    const [result] = await pool.query(sqlQuery);
     return result;
+}
+export async function addMealPlan(UserID: string, Name: string, Public: boolean): Promise<any> {
+    const callProcedure = `CALL CreateMealPlanTransaction('${UserID}', '${Name}', ${Public});`;
+    const result = await pool.query(callProcedure);
+    return result[0]; 
+}
+export async function addMealPlanRecipes(MealPlanID: number, recipes: number[]): Promise<void> {
+    for (const recipeID of recipes) {
+        const addMealPlanQuery = `INSERT INTO MealPlanRecipes(MealPlanID, RecipeID) VALUES ('${MealPlanID}', '${recipeID}')`;
+        await pool.query(addMealPlanQuery);
+    }
 }
 // export async function deletePokemonSpawnbyID(spawnID: number): Promise<void> {
 //     const sqlQuery = `DELETE FROM pokemon_spawn WHERE spawnID = ${spawnID};`;

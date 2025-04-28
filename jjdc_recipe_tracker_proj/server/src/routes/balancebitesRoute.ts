@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, addMealPlan} from "../services/database";
+import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, addMealPlan, addMealPlanRecipes, searchRecipes} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -56,20 +56,6 @@ router.post("/login", async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error User Doesn't Exist" });
     }
 });
-
-
-router.post("/login", async (req: Request, res: Response) => {
-    // code for getting the user? If the user exists with a specified id and password, good, otherwise bad
-    // need to write a new SQL query for this.
-    const loginInfo = req.body
-    try {
-        const correctUser: User[] = await getUserByLogin(loginInfo.UserID, loginInfo.Password)
-        console.log(correctUser)
-        res.status(201).json(correctUser);
-    } catch (error) {
-        res.status(500).json({ message: "Error User Doesn't Exist" });
-    }
-});
 router.get("/macros", async (req: Request, res: Response) => {
     const userId = 'aabrahmovicio6';
     try {
@@ -80,37 +66,33 @@ router.get("/macros", async (req: Request, res: Response) => {
         res.status(500).json({ message: "Error fetching macros" });
     }
 });
-router.get("/meal", async (req: Request, res: Response) => {
-    const userId = 'aabrahmovicio6';
+router.get("/search/recipes", async (req: Request, res: Response) => {
+    const { searchTerm, userID } = req.query;
     try {
-        const macros = await addMealPlan(userId);
-        console.log(macros);
-        res.status(201).json(macros);
+        const recipes = await searchRecipes(searchTerm as string, userID as string);
+        res.status(201).json(recipes);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching macros" });
+        res.status(500).json({ message: "Error fetching recipes" });
     }
 });
-router.get("/macros", async (req: Request, res: Response) => {
-    const userId = 'aabrahmovicio6';
+router.post("/meal", async (req: Request, res: Response) => {
+    const { userID, name, isPublic } = req.body;
     try {
-        const macros = await getUserMacros(userId);
-        console.log(macros);
-        res.status(201).json(macros);
+        const mealPlanID = await addMealPlan(userID, name, isPublic);
+        res.status(201).json(mealPlanID);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching macros" });
+        res.status(500).json({ message: "Error creating meal plan" });
     }
 });
-router.get("/meal", async (req: Request, res: Response) => {
-    const userId = 'aabrahmovicio6';
+router.post("/meal/recipes", async (req: Request, res: Response) => {
+    const { mealPlanID, recipes } = req.body;
     try {
-        const macros = await addMealPlan(userId);
-        console.log(macros);
-        res.status(201).json(macros);
+        await addMealPlanRecipes(mealPlanID, recipes);
+        res.status(201).json();
     } catch (error) {
-        res.status(500).json({ message: "Error fetching macros" });
+        res.status(500).json({ message: "Error adding to meal plan recipes" });
     }
 });
-
 
 
 
