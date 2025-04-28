@@ -67,3 +67,21 @@ export async function addRecipe(NewRecipe: Recipe): Promise<void> {
     const result = await pool.query(sqlQuery);
     console.log(result)
 }
+
+export async function addIngredient(NewIngredient: Ingredients): Promise<void> {
+    // console.log(NewRecipe)
+    const sqlQuery = `INSERT INTO BalanceBites.Ingredients (RecipeID, FoodName, Quantity) VALUES ('${NewIngredient.RecipeID}', '${NewIngredient.FoodName}', '${NewIngredient.Quantity}');`;
+    console.log("after new ingredient")
+    const result = await pool.query(sqlQuery);
+    console.log(result)
+}
+
+export async function updateIngredient(ingredient: Ingredients): Promise<void> {
+    const sqlQuery = `UPDATE Ingredients SET Quantity = ${ingredient.Quantity} WHERE RecipeID = ${ingredient.RecipeID} AND FoodName = '${ingredient.FoodName}';`;
+    await pool.query(sqlQuery);
+}
+
+export async function deleteIngredient(ingredient: Ingredients): Promise<void> {
+    const sqlQuery = `DELETE FROM Ingredients WHERE RecipeID = ${ingredient.RecipeID} AND FoodName = '${ingredient.FoodName}';`;
+    await pool.query(sqlQuery);
+}
