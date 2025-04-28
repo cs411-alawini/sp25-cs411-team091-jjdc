@@ -48,7 +48,9 @@ export async function action({ request }: { request: Request }) {
         }
     }
 
-    return createNewUserSession(userID, "/")
+    const currUserSingle = currUser.at(0)
+
+    return createNewUserSession(userID, currUserSingle ? currUserSingle.Name : "", "/")
 }
  
 

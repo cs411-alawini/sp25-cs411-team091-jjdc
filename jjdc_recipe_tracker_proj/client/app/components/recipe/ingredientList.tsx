@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 interface IngredientListProps {
     ingredientData: Ingredients[];
-    nutritionData: Nutritions;
+    nutritionData: Nutritions | undefined;
 }
 
 // const getPokemonImage = async (pokemonName: string): Promise<string | null> => {
@@ -40,6 +40,7 @@ const IngredientList: React.FC<IngredientListProps> = ({ ingredientData, nutriti
 
 //     fetchImages();
 //   }, [pokemonData]); // Runs whenever pokemonData changes
+
   console.log(ingredientData)
   return (
     <ul className="divide-y divide-gray-200">

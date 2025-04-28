@@ -1,14 +1,10 @@
 
 import React, {useState, useEffect} from 'react';
-// import { Link, useParams } from 'react-router-dom';
 import { searchUserData, type User , type Recipe , type Ingredients, type Nutritions, searchRecipeData, getRecipeByID, getFoodsInRecipeByID, getNutritionsInRecipeByID} from "../../services/services";
 import IngredientList from '~/components/recipe/ingredientList';
-// import { numberInput } from '@heroui/react';
+import { Form, Input, numberInput } from '@heroui/react';
 // import PokemonDataCard from '../components/pokemonDataCard/pokemonDataCard';
 // import PokemonSpawnTimeline from '../components/pokemonSpawnTimeline/pokemonSpawnTimeline';
-
-
-
 import { Link, useParams } from 'react-router';
 
 
