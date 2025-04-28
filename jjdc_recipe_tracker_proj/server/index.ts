@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import balanceBiteRoutes from './src/routes/balancebitesRoute';
+import recipeRoutes from './src/routes/recipeRoute';
 import cors from "cors";
 
 const app = express();
@@ -26,6 +27,7 @@ app.get('/api', (req: Request, res: Response) => {
 });
 
 app.use('/api/balancebites', balanceBiteRoutes);
+app.use('/api/recipe', recipeRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

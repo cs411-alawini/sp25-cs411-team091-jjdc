@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import type { User } from "../../services/services";
+import type { User, Recipe } from "../../services/services";
 import { Link } from "react-router";
 
-interface UserListProps {
-  userData: User[];
+interface RecipeListProps {
+  recipeData: Recipe[];
 }
 
 // const getPokemonImage = async (pokemonName: string): Promise<string | null> => {
@@ -22,7 +22,7 @@ interface UserListProps {
 //   }
 // };
 
-const UserList: React.FC<UserListProps> = ({ userData }) => {
+const UserList: React.FC<RecipeListProps> = ({ recipeData }) => {
 //   const [pokemonImages, setPokemonImages] = useState<{
 //     [key: number]: string | null;
 //   }>({});
@@ -39,18 +39,38 @@ const UserList: React.FC<UserListProps> = ({ userData }) => {
 
 //     fetchImages();
 //   }, [pokemonData]); // Runs whenever pokemonData changes
-  console.log(userData)
+  console.log(recipeData)
   return (
     <ul className="divide-y divide-gray-200">
-      {userData.map((user) => (
-        <li key={user.UserID} className="flex py-4">
+      {recipeData.map((recipe) => (
+        <li key={recipe.RecipeID} className="flex py-4">
           <div className="ml-3 py-5">
             <p className="text-xl font-medium text-gray-900">
-              {user.Name}
+              {recipe.Name}
             </p>
-            <p className="text-xl font-medium text-gray-900">
+            {/* <p className="text-xl font-medium text-gray-900">
               {user.Password}
-            </p>
+            </p> */}
+          </div>
+
+          <div className="ml-auto py-8">
+            <Link className="text-indigo-600 hover:text-indigo-900 flex items-center" to={`/searchRecipe/${recipe.RecipeID}`}>
+              See ingredients
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
           </div>
         </li>
       ))}

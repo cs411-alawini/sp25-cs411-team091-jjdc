@@ -12,4 +12,7 @@ type Params = {
   "/login": {};
   "/logout": {};
   "/recipe": {};
+  "/searchRecipe/:RecipeID": {
+    "RecipeID": string;
+  };
 };

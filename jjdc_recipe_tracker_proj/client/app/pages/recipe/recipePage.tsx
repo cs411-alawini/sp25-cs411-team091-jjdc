@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/recipe/searchBar";
-import UserList from "../../components/UserSearch/userList";
-import { searchUserData, type User } from "../../services/services";
+import RecipeList from "../../components/recipe/recipeList";
+import { searchUserData, type User , type Recipe , searchRecipeData} from "../../services/services";
 import { useParams } from "react-router";
 
 export function UserSearching() {
     const [searchQuery, setSearchQuery] = React.useState("");
-    const [userData, setUserData] = React.useState<User[]>([]);
+    const [recipeData, setRecipeData] = React.useState<Recipe[]>([]);
 
     const handleSearch = (query: string) => {
         console.log(query)
@@ -15,12 +15,12 @@ export function UserSearching() {
 
     useEffect(() => {
         const fetchData = async() => {
-            setUserData([]);
-            console.log("hei?")
+            setRecipeData([]);
+            // console.log("hei?")
             console.log(searchQuery)
-            const data = await searchUserData(searchQuery);
+            const data = await searchRecipeData(searchQuery);
             // console.log(data);
-            setUserData(data);
+            setRecipeData(data);
         };
 
         fetchData();
@@ -44,7 +44,7 @@ export function UserSearching() {
             <div className="mx-auto max-w-7xl px-4 sm:px-12 lg:px-8">
                  <SearchBar onSearch={handleSearch}/>
                  <div className="mt-6 py-10 sm:py-15">
-                     <UserList userData={userData} />
+                     <RecipeList recipeData={recipeData} />
                  </div>
             </div>
 
