@@ -67,7 +67,8 @@ BEGIN
   -- Insert recipes into MealPlanRecipes
     INSERT INTO MealPlanRecipes (MealPlanID, RecipeID)
     VALUES (nextMealPlanID, inRecipeID1),
-           (nextMealPlanID, inRecipeID2);
+                   (nextMealPlanID, inRecipeID2),
+
 
     -- First Advanced Query: Calculate total calories and average protein for the recipes in the meal plan
     SELECT 
@@ -78,7 +79,7 @@ BEGIN
     WHERE Ingredients.RecipeID IN (
         SELECT RecipeID
         FROM MealPlanRecipes
-        WHERE MealPlanID = p_MealPlanID
+        WHERE MealPlanID = nextMealPlanID
     );
 
     -- Second Advanced Query: Calculate total number of ingredients and average number of ingredients per recipe
@@ -91,14 +92,14 @@ BEGIN
         WHERE RecipeID IN (
             SELECT RecipeID
             FROM MealPlanRecipes
-            WHERE MealPlanID = p_MealPlanID
+            WHERE MealPlanID = nextMealPlanID
         )
         GROUP BY RecipeID
     ) AS IngredientCounts;
 
     -- Condition to check if the meal plan exceeds a limit (e.g., 5 meal plans per day)
     SELECT COUNT(MealPlanID) INTO mealplan_count
-    FROM MealPlan
+    FROM MealPlan NATURAL JOIN NutritionLog
     WHERE UserID = p_UserID AND DATE(Time) = CURRENT_DATE() AND Public = 1;
 
     IF mealplan_count > 5 THEN
@@ -110,6 +111,7 @@ BEGIN
 END //
 
 DELIMITER ;
+
 
 ## Trigger:
 DELIMITER //
