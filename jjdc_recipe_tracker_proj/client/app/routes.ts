@@ -11,6 +11,8 @@ export default [
     route("/addIngredients", "routes/addIngredients.tsx"),
     route("/searchRecipe/:RecipeID", "routes/searchRecipe.tsx"), 
     route("/addMealPlan", "routes/addMealPlan.tsx"),
+    route("/mealplan", "routes/usermealplan.tsx"),
+    // route("/searchmealplan/:MealPlanID", "routes/searchMealPlan.tsx")
     route("/nutritionStats", "routes/nutritionStats.tsx")
 ] satisfies RouteConfig;
 

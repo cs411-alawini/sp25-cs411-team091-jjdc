@@ -17,5 +17,6 @@ type Params = {
     "RecipeID": string;
   };
   "/addMealPlan": {};
+  "/mealplan": {};
   "/nutritionStats": {};
 };

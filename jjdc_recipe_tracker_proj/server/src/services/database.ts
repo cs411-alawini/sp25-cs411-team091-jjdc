@@ -61,9 +61,7 @@ export async function getUserNutritionStats(userId: string): Promise<any> {
     const [rows] = await pool.query('CALL GetUserNutritionStats(?)', [userId]);
     // Stored procedures in MySQL2 return [[result1], [result2], ...]
     // const todayStats = rows[0];
-    // const weeklyAvgStats = rows[1];
-
-    return rows;
+    // const weeklyAvgStats = rows[1];${
 }
 
 export async function addNutritionLog(NewLog: Log): Promise<void> {
@@ -104,6 +102,7 @@ export async function addMealPlanRecipes(MealPlanID: number, recipes: number[]):
 
 
 
+
 // export async function getUserNutritionStats(userId: string): Promise<any> {
 //     const [rows] = await pool.query('CALL GetUserNutritionStats(?)', [userId]);
 //     // Stored procedures in MySQL2 return [[result1], [result2], ...]
@@ -116,7 +115,17 @@ export async function addMealPlan(UserID: string, Name: string, Public: boolean,
     const callProcedure = `CALL CreateMealPlanTransaction('${UserID}', '${Name}', ${Public}, '${RecipeID1}', '${RecipeID2}');`;
     await pool.query(callProcedure);
 }
-  
+
+export async function getUserMealPlansByID(userId: string): Promise<any> {
+    const [rows] = await pool.query(`SELECT * FROM MealPlan WHERE UserID LIKE '${userId}';`);
+    return rows;
+}
+
+export async function getMealPlansByID(mealplanId: number): Promise<any> {
+    const [rows] = await pool.query(`SELECT * FROM MealPlan WHERE MealPlanID = ${mealplanId};`);
+    return rows;
+}
+
 // export async function deletePokemonSpawnbyID(spawnID: number): Promise<void> {
 //     const sqlQuery = `DELETE FROM pokemon_spawn WHERE spawnID = ${spawnID};`;
 //     await pool.query(sqlQuery);
