@@ -23,4 +23,5 @@ type Params = {
     "MealPlanID": string;
   };
   "/nutritionStats": {};
+  "/nutritionLog": {};
 };
