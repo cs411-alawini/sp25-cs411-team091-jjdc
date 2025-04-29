@@ -74,7 +74,7 @@ export async function getAllFoodName(): Promise<string[]> {
 
 export async function addRecipe(NewRecipe: Recipe): Promise<void> {
     // console.log(NewRecipe)
-    const sqlQuery = `INSERT INTO BalanceBites.Recipes (RecipeID, Name, UserID, Public) VALUES ('${NewRecipe.RecipeID}', '${NewRecipe.Name}', '${NewRecipe.UserID}', '${NewRecipe.Public}');`;
+    const sqlQuery = `INSERT INTO BalanceBites.Recipes (RecipeID, Name, UserID, Public) VALUES (${NewRecipe.RecipeID}, '${NewRecipe.Name}', '${NewRecipe.UserID}', ${NewRecipe.Public});`;
     console.log("after new recipe")
     const result = await pool.query(sqlQuery);
     console.log(result)
