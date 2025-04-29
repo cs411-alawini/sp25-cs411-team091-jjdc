@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getAllPokemon, getPokemonByID, getPokemonByPokemonName } from "../services/database";
-import { Pokemon } from "../models/pokemon";
+import { getAllUser} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -23,13 +22,6 @@ router.get("/", async (req: Request, res: Response) => {
         }
 
     } else {
-        const query = req.query.search as string;
-        try {
-            const pokemon = await getPokemonByPokemonName(query);
-            res.status(200).json(pokemon);
-        } catch (error) {
-            res.status(500).json({ message: "Error fetching Pokémon" });
-        }
     }
 });
 
