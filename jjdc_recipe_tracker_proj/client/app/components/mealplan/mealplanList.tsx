@@ -54,7 +54,7 @@ const MealPlanList: React.FC<MealPlanListProps> = ({ MealPlanData }) => {
           </div>
 
           <div className="ml-auto py-8">
-            <Link className="text-indigo-600 hover:text-indigo-900 flex items-center" to={`/searchRecipe/${mealplan.MealPlanID}`}>
+            <Link className="text-indigo-600 hover:text-indigo-900 flex items-center" to={`/searchmealplan/${mealplan.MealPlanID}`}>
               See Recipes
               <svg
                 xmlns="http://www.w3.org/2000/svg"
