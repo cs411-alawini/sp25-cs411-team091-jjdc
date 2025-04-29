@@ -55,8 +55,8 @@ export async function getMaxRecipeID(): Promise<number> {
     console.log("Getting the max recipeID")
     // const queryName = RecipeID;//.toLowerCase();
     const sqlQuery = `SELECT MAX(RecipeID) + 1 AS maxID FROM BalanceBites.Recipes;`;
-    const maxID = await pool.query(sqlQuery);
-    // console.log(rows)
+    const [maxID] = await pool.query(sqlQuery);
+    console.log(maxID)
     return maxID as unknown as number;
 };
 
