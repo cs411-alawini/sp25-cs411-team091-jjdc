@@ -87,7 +87,7 @@ router.post("/meal", async (req: Request, res: Response) => {
 
 
 router.get("/nutritionstats", async (req: Request, res: Response) => {
-    const userId = 'aabrahmovicio6';
+    const { userId } = req.body //'aabrahmovicio6';
     try {
         console.log("In stats");
         const stats = await getUserNutritionStats(userId);

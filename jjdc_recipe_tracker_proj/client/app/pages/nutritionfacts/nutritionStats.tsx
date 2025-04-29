@@ -28,7 +28,9 @@ interface NutritionStatsPageProps {
       useEffect(() => {
           const fetchStats = async () => {
               try {
-                  const response = await axios.get("/nutritionstats");
+                  const response = await axios.get("/nutritionstats", {
+                    params: { UserID: userID },
+                  });
                   console.log(response.data);
                   
                   const data = response.data;
