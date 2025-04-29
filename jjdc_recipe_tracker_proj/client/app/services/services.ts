@@ -116,7 +116,7 @@ export const addrecipe = (recipeid: number, name: string, userid: string, public
   return httpClient.post('/api/recipe/addrecipe', NewRecipe).then((response) => response.data);
 }
 
-export const getMxRecipeByID = (): Promise<number> => {
+export const getMaxRecipeByID = (): Promise<number> => {
   return httpClient
       .get(`/api/recipe/maxrecipe`)
       .then((response) => {
@@ -125,3 +125,12 @@ export const getMxRecipeByID = (): Promise<number> => {
       });
 };
 
+
+export const getAllFoodName = (): Promise<string[]> => {
+  return httpClient
+      .get(`/api/recipe/allfood`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
