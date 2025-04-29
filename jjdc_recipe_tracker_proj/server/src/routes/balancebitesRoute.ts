@@ -72,8 +72,8 @@ router.get("/nutritionstats", async (req: Request, res: Response) => {
         }
     }
     else {
-        const userId = req.query.UserID as string; //'aabrahmovicio6';
-
+        const userId = 'aabrahmovicio6'; //= req.query.UserID as string; //'aabrahmovicio6';
+        console.log(userId)
         try {
             console.log("In stats");
             const stats = await getUserNutritionStats(userId);

@@ -80,7 +80,7 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
         </Link>
       </NavbarItem>
       <NavbarItem>
-        <Link className="text-white" color="primary" href="/searchmealplan"> 
+        <Link className="text-white" color="primary" href="/mealplan"> 
           Search Meal Plans
         </Link>
       </NavbarItem>
