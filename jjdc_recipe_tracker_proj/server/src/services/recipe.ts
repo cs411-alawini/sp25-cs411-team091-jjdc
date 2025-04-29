@@ -60,6 +60,16 @@ export async function getMaxRecipeID(): Promise<number> {
     return maxID as unknown as number;
 };
 
+export async function getAllFoodName(): Promise<string[]> {
+    console.log("Getting all food names")
+    // const queryName = RecipeID;//.toLowerCase();
+    const sqlQuery = `SELECT FoodName FROM BalanceBites.Foods;`;
+    const [rows] = await pool.query(sqlQuery);
+    // console.log(rows)
+    return rows as unknown as string[];
+};
+
+
 export async function addRecipe(NewRecipe: Recipe): Promise<void> {
     // console.log(NewRecipe)
     const sqlQuery = `INSERT INTO BalanceBites.Recipes (RecipeID, Name, UserID, Public) VALUES ('${NewRecipe.RecipeID}', '${NewRecipe.Name}', '${NewRecipe.UserID}', '${NewRecipe.Public}');`;

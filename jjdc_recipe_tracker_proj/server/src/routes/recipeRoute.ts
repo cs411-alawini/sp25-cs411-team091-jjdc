@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { getAllUser, getUserByUserID, addUser} from "../services/database";
 import { User } from "../models/user";
 import { Ingredients, Recipe } from "../models/recipe";
-import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID, addRecipe, getMaxRecipeID, addIngredient, updateIngredient, deleteIngredient } from "../services/recipe";
+import { getAllRecipe, getRecipeByName, getRecipeByID, getFoodsInRecipeByID, getNutritionInRecipeByID, addRecipe, getMaxRecipeID, addIngredient, updateIngredient, deleteIngredient, getAllFoodName } from "../services/recipe";
 
 const router = Router();
 
@@ -17,6 +17,20 @@ router.get("/maxrecipe", async (req: Request, res: Response) => {
       }
     } catch (error) {
       res.status(500).json({ message: "Error fetching Max Recipe ID" });
+    }
+});
+
+router.get("/allfood", async (req: Request, res: Response) => {
+    console.log("Getting all food");
+    try {
+      const foods = await getAllFoodName();
+      if (foods) {
+        res.status(200).json(foods);
+      } else {
+        res.status(404).json({ message: `No food name found` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching food name" });
     }
 });
 
@@ -128,6 +142,8 @@ router.get("/", async (req: Request, res: Response) => {
         }
     }
 });
+
+
 
 
 
