@@ -36,4 +36,4 @@ Not much else changed from our proposal to the final product besides what we lis
 Our division of labor was fair throughout the entire semester. In stage 0, Jake did the setup, which made us decide to make him the captain. In stage 1, Jake worked with the team to divide the work equally, which worked out well. In stage 2, we again split up the work equally except for the UML design, which we did entirely together in class with the help of Aryan. Stage 3 was again split up equally with Chi unfortunately having to deal with messy data, which we all helped with. Then in stage 4, Jason led the setup, Dan did the visualization, and we all again split up the work from there. Our teamwork was good, as we frequently communicated over our text group chat and met in-person and online a few times throughout the semester for planning and splitting up the work. Throughout the semester, we had no issues with each other and no one interfered with anyone else's work. 
 
 - Project Video: 
-TODO
+![](video1251888432.mp4)
