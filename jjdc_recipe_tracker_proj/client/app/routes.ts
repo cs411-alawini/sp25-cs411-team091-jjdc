@@ -13,7 +13,8 @@ export default [
     route("/addMealPlan", "routes/addMealPlan.tsx"),
     route("/mealplan", "routes/usermealplan.tsx"),
     route("/searchmealplan/:MealPlanID", "routes/searchMealplan.tsx"),
-    route("/nutritionStats", "routes/nutritionStats.tsx")
+    route("/nutritionStats", "routes/nutritionStats.tsx"),
+    route("/nutritionLog", "routes/nutritionLog.tsx")
 ] satisfies RouteConfig;
 
 

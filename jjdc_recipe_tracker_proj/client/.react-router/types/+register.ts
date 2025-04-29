@@ -20,4 +20,5 @@ type Params = {
   "/addMealPlan": {};
   "/mealplan": {};
   "/nutritionStats": {};
+  "/nutritionLog": {};
 };
