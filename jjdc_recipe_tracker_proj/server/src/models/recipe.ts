@@ -23,3 +23,7 @@ export interface Log{
     Time: Date;
     RecipeID: number;
 }
+
+export interface maxID{
+    maxID: number;
+}
