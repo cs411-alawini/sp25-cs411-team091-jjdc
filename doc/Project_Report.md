@@ -1,7 +1,7 @@
 # Final Report
 
 ## Discussion
-Our final project ended up being a little different than what we originally proposed. We have not implemented a way to recommend users recipes/foods based on their current macronutrients, opting first to create the CRUD functionalities of the Recipe table and MealPlan tables. The basic calorie counting based on the recipes is still present, as is the visualization, which changed from showing a week's worth of data to only three days for simplicity. 
+Our final project ended up being a little different than what we originally proposed. We have not implemented a way to recommend users recipes/foods based on their current macronutrients, opting first to create the CRUD functionalities of the Recipe table and MealPlan tables. The basic calorie counting based on the recipes is still present, as is the visualization, which changed from showing a week's worth of data to only four days for simplicity. 
 
 Usefulness-wise, we have implemented four of the main functions of our app: creating recipes, updating them, the individual calorie requirement (a user can enter their's and compare it against what they currently have in their nutrition log) and the visualization. In our application, we failed to implement the food/recipe recommendation based on macronutrients. We ended up instead creating a summary/nutrition statistics page that calculated summary values for all macros during the day (a sum) and during the week (an average), which is where the individual calorie requirement is also.
 
