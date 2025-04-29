@@ -24,14 +24,7 @@ export async function action({ request }: { request: Request }) {
 }
 
 export function StickyNavbar({ user }: { user: Omit<User, "Password"> }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false); //  onMenuOpenChange={setIsMenuOpen}
-    const menuItems = {
-      Home: "/",
-      Recipes: "/recipes",
-      "Meal Plans": "/plans",
-      "Nutrion Log": "/logs",
-      creation: "/roots",
-    };
+
     return (
         <Navbar className="dark bg-black">
             <NavbarContent className="hidden md:flex gap-4" justify="center">
@@ -66,7 +59,16 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
           Meal Plans
         </Link>
       </NavbarItem>
-
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/nutritionStats"> 
+        {user.Name}'s Nutrition Stats
+        </Link>
+      </NavbarItem>
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/log"> 
+          Nutrition Tracker
+        </Link>
+      </NavbarItem>
 
       <NavbarItem>
         {/* <Button className="text-white" color="danger" onPress={async () => {
