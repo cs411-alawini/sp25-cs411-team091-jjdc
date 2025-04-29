@@ -13,10 +13,14 @@ type Params = {
   "/login": {};
   "/logout": {};
   "/recipe": {};
+  "/addIngredients": {};
   "/searchRecipe/:RecipeID": {
     "RecipeID": string;
   };
   "/addMealPlan": {};
   "/mealplan": {};
+  "/searchmealplan/:MealPlanID": {
+    "MealPlanID": string;
+  };
   "/nutritionStats": {};
 };
