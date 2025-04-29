@@ -23,6 +23,7 @@ interface NutritionStatsPageProps {
       const [nutritionStats, setNutritionStats] = useState<NutritionStats | null>(null);
       const [loading, setLoading] = useState(true);
       const [error, setError] = useState<string | null>(null);
+      const [calorieGoal, setCalorieGoal] = useState<number | null>(null);
   
       useEffect(() => {
           const fetchStats = async () => {
@@ -54,6 +55,29 @@ interface NutritionStatsPageProps {
   
           fetchStats();
       }, []);
+
+      const handleGoalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value);
+        if (!isNaN(value)) {
+            setCalorieGoal(value);
+        } else {
+            setCalorieGoal(null);
+        }
+    };
+
+    const renderCalorieComparison = () => {
+        if (nutritionStats && calorieGoal !== null) {
+            const difference = calorieGoal - nutritionStats.sumCalories;
+            if (difference > 0) {
+                return <p className="text-green-600">You are under your calorie goal by {difference} calories. 🎯</p>;
+            } else if (difference < 0) {
+                return <p className="text-red-600">You are over your calorie goal by {Math.abs(difference)} calories. ⚠️</p>;
+            } else {
+                return <p className="text-blue-600">You exactly hit your calorie goal! 🎉</p>;
+            }
+        }
+        return null;
+    };
   
       if (loading) return <div className="text-center mt-10">Loading...</div>;
       if (error) return <div className="text-center text-red-500 mt-10">{error}</div>;
@@ -71,6 +95,21 @@ interface NutritionStatsPageProps {
                   {userID && (
                       <p className="mb-4 text-gray-500">User ID: {userID}</p>
                   )}
+                    {/* Input for Calorie Goal */}
+<div className="mb-6">
+  <label className="block text-sm font-medium text-gray-700 mb-2">
+    Set Your Daily Calorie Goal:
+  </label>
+  <input
+    type="number"
+    value={calorieGoal ?? ''}
+    onChange={handleGoalChange}
+    placeholder="Enter calorie goal (e.g., 2500)"
+    className="border p-2 rounded w-full max-w-xs"
+  />
+</div>
+                  {/* Show the comparison result */}
+                {renderCalorieComparison()}
   
                   {nutritionStats && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
