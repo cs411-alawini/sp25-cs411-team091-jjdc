@@ -29,6 +29,15 @@ export interface Nutritions{
   sumProtein: number;
 }
 
+export interface MealPlan{
+  MealPlanID: number;
+  UserID: string;
+  Name: string;
+  Public: boolean;
+}
+
+
+
 export const httpClient = axios.create({
     baseURL: BASE_URL,
     headers: {
@@ -129,6 +138,26 @@ export const getMaxRecipeByID = (): Promise<number> => {
 export const getAllFoodName = (): Promise<string[]> => {
   return httpClient
       .get(`/api/recipe/allfood`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
+
+export const getUserMealPlanByID = (id: string): Promise<MealPlan[]> => {
+  return httpClient
+      .get(`/api/balancebites/mealplan`, {
+        params: { search: id },
+      })
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
+
+export const getMealPlanByID = (id: number): Promise<MealPlan[]> => {
+  return httpClient
+      .get(`/api/balancebites/mealplan/${id}`)
       .then((response) => {
         console.log("API raw response:", response.data);
         return response.data;

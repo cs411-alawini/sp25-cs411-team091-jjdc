@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, searchRecipes, addMealPlan, addMealPlanRecipes, getUserNutritionStats, addNutritionLog} from "../services/database";
+import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, searchRecipes, addMealPlan, addMealPlanRecipes, getUserNutritionStats, addNutritionLog, getUserMealPlansByID, getMealPlansByID} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -144,6 +144,40 @@ router.post("/meal/recipes", async (req: Request, res: Response) => {
         res.status(201).json();
     } catch (error) {
         res.status(500).json({ message: "Error adding to meal plan recipes" });
+    }
+});
+
+router.get("/mealplan", async (req: Request, res: Response) => {
+    // if there is no query parameter, return all users
+    console.log('here')
+    if (!req.query.search) {
+        console.log('here')
+        res.status(500).json({ message: "Error fetching mealplan by UserID" });
+    }
+    else {
+        console.log('there')
+        const query = req.query.search as string;
+        console.log(query)
+        try {
+            const users: User[] = await getUserMealPlansByID(query)
+            res.status(200).json(users);
+        } catch (error) {
+            res.status(500).json({ message: "Error fetching mealplan" });
+        }
+    }
+});
+
+router.get("/mealplan/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    try {
+      const mealplan = await getMealPlansByID(id);
+      if (mealplan) {
+        res.status(200).json(mealplan);
+      } else {
+        res.status(404).json({ message: `No meal plan found with ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching meal plan" });
     }
 });
 
