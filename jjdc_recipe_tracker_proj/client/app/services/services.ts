@@ -134,3 +134,4 @@ export const getAllFoodName = (): Promise<string[]> => {
         return response.data;
       });
 };
+

@@ -58,7 +58,8 @@ export async function updateUserID(User: User): Promise<void> {
 }
 
 export async function getUserNutritionStats(userId: string): Promise<any> {
-    const [rows] = await pool.query('CALL GetUserNutritionStats(?)', [userId]);
+    const callProcedure = `CALL GetUserNutritionStats('${userId}');`;
+    const [rows] = await pool.query(callProcedure);
     // Stored procedures in MySQL2 return [[result1], [result2], ...]
     // const todayStats = rows[0];
     // const weeklyAvgStats = rows[1];
@@ -71,7 +72,7 @@ export async function addNutritionLog(NewLog: Log): Promise<void> {
     const now: Date = new Date();
     console.log(now.toISOString().slice(0, 19).replace('T', ' '));
     const date_to_put = now.toISOString().slice(0, 19).replace('T', ' ');
-    const sqlQuery = `INSERT INTO BalanceBites.NutritionLog (UserID, Time, RecipeID) VALUES ('${NewLog.UserID}', ${NewLog.Time}, ${NewLog.RecipeID});`;
+    const sqlQuery = `INSERT INTO BalanceBites.NutritionLog (UserID, Time, RecipeID) VALUES ('${NewLog.UserID}', '${NewLog.Time}', ${NewLog.RecipeID});`;
     console.log("after adding nutritionLog")
     const result = await pool.query(sqlQuery);
     console.log(result)

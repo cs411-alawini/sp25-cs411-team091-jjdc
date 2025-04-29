@@ -10,7 +10,8 @@ export default [
     route("/recipe", "routes/recipe.tsx"),
     route("/searchRecipe/:RecipeID", "routes/searchRecipe.tsx"), 
     route("/addMealPlan", "routes/addMealPlan.tsx"),
-    route("/nutritionStats", "routes/nutritionStats.tsx")
+    route("/nutritionStats", "routes/nutritionStats.tsx"),
+    route("/nutritionLog", "routes/nutritionLog.tsx")
 ] satisfies RouteConfig;
 
 
