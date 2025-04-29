@@ -129,10 +129,10 @@ router.get("/search/recipes", async (req: Request, res: Response) => {
     }
 });
 router.post("/meal", async (req: Request, res: Response) => {
-    const { userID, name, isPublic } = req.body;
+    const { userID, name, isPublic, recipes } = req.body;
     try {
-        const mealPlanID = await addMealPlan(userID, name, isPublic);
-        res.status(201).json(mealPlanID);
+        await addMealPlan(userID, name, isPublic, recipes[0], recipes[1]);
+        res.status(201).json({ message: "Meal plan created successfully" });
     } catch (error) {
         res.status(500).json({ message: "Error creating meal plan" });
     }

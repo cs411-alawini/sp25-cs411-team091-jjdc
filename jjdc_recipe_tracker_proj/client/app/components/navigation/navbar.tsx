@@ -61,6 +61,11 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
           Recipes
         </Link>
       </NavbarItem>
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/addMealPlan"> 
+          Meal Plans
+        </Link>
+      </NavbarItem>
 
 
       <NavbarItem>

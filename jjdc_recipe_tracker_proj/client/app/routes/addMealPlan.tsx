@@ -1,6 +1,14 @@
 import { TextField, Box, Typography, Button, Checkbox, FormControlLabel } from '@mui/material';
 import { useState, useEffect, useCallback } from 'react';
+import { getCurrentUserID } from '../services/sessions.server'
+import { useLoaderData } from 'react-router';
 import axios from 'axios'; 
+
+export async function loader({ request }: { request: Request }) {
+    const currUser = await getCurrentUserID(request);
+
+    return currUser ? currUser : "aabrahmovicio6";
+}
 
 function SimpleRecipeSearch() {
   const [query, setQuery] = useState('');
@@ -8,8 +16,9 @@ function SimpleRecipeSearch() {
   const [selectedRecipes, setSelectedRecipes] = useState<number[]>([]);
   const [mealPlanName, setMealPlanName] = useState('');
   const [isPublic, setIsPublic] = useState(true);
-  const [userID] = useState('aabrahmovicio6');
+  const userID: string = useLoaderData();
   const [selectedRecipeNames, setSelectedRecipeNames] = useState<Map<number, string>>(new Map());
+
   const fetchRecipes = async (searchTerm: string) => {
     try {
       const response = await axios.get('http://localhost:3007/api/balancebites/search/recipes', {
