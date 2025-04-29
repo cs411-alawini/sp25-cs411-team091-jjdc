@@ -2,23 +2,36 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../../components/recipe/searchBar";
 import RecipeList from "../../components/recipe/recipeList";
 import RecipeForm from "~/components/recipe/recipeForm";
-import { searchUserData, type User , type Recipe , searchRecipeData} from "../../services/services";
-import { useParams } from "react-router";
+import { searchUserData, type User , type Recipe , searchRecipeData, addrecipe } from "../../services/services";
+import { useParams, Form } from "react-router";
+import {  
+    Button,
+    Modal,
+    ModalContent,
+    ModalHeader, 
+    ModalBody,
+    ModalFooter,
+    useDisclosure,
+    Input,
+} from "@heroui/react"
+
 
 export function UserSearching() {
     const [searchQuery, setSearchQuery] = React.useState("");
     const [recipeData, setRecipeData] = React.useState<Recipe[]>([]);
     const [isFormVisible, setIsFormVisible] = React.useState(false);
     const [recipeInformationToEdit, setRecipeInformationToEdit] = React.useState<Recipe | null>(null);
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     const handleSearch = (query: string) => {
         console.log(query)
         setSearchQuery(query);
     }
 
-    const handleAddNewRecipe = () => {
-        setRecipeInformationToEdit(null);
-        setIsFormVisible(true);
+    const handleAddNewRecipe = async () => {
+        // setRecipeInformationToEdit(null);
+        // setIsFormVisible(true);
+        console.log("yippee")
     };
 
     useEffect(() => {
@@ -53,27 +66,44 @@ export function UserSearching() {
                  <SearchBar onSearch={handleSearch}/>
 
                  <div className="flex space-x-4">
-                    <button 
+                    {/* <button 
                         onClick={handleAddNewRecipe}
                         className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
                         + New
-                    </button>
+                    </button> */}
+                    <Button className="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700" onPress={onOpen}>Add Recipe</Button>
+                    <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
+                        <ModalContent>
+                        {(onClose) => (
+                            <>
+                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                            <ModalBody>
+                                <RecipeForm />
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                Close
+                                </Button>
+                                <Button 
+                                type="submit"
+                                color="primary" 
+                                onPress={() => {
+                                    onClose();
+                                    handleAddNewRecipe();
+                                }}>
+                                Submit
+                                </Button>
+                            </ModalFooter>
+                            </>
+                        )}
+                        </ModalContent>
+                    </Modal>
                  </div>
 
                  <div className="mt-6 py-10 sm:py-15">
                      <RecipeList recipeData={recipeData} />
                  </div>
             </div>
-
-            {/* <div className="mt-6 py-10 sm:py-15">
-                <UserList userData={userData} />
-            </div> */}
-
-            {
-                isFormVisible && (
-                    <RecipeForm onClose={()=> setIsFormVisible(false)}/>
-                )
-            }
         </div>
     );
 }

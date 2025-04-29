@@ -1,13 +1,23 @@
-import type { Route } from "./+types/home";
 import { UserSearching } from "../pages/recipe/recipePage"
 
-export function meta({}: Route.MetaArgs) {
+
+// export async function loader({ request }: { request: Request }) {
+
+// }
+
+// export async function action({ request }: { request: Request }) {
+
+// }
+
+export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Balance Bites Project" },
+    { name: "description", content: "CS411 Project" },
   ];
 }
 
 export default function Recipe() {
-  return <UserSearching />;
+  return (
+    <UserSearching />
+  );
 }
