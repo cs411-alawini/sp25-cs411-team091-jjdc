@@ -13,6 +13,7 @@ type Params = {
   "/login": {};
   "/logout": {};
   "/recipe": {};
+  "/addIngredients": {};
   "/searchRecipe/:RecipeID": {
     "RecipeID": string;
   };
