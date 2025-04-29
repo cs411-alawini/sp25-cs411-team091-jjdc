@@ -18,4 +18,5 @@ type Params = {
   };
   "/addMealPlan": {};
   "/mealplan": {};
+  "/nutritionStats": {};
 };

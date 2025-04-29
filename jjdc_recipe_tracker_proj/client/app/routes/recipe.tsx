@@ -38,17 +38,17 @@ export async function action({ request }: { request: Request }) {
   if (isPub === "on") {
     publicBool = true
   }
-  console.log(publicBool)
+  // console.log(publicBool)
   if (typeof recipeName !== "string" || typeof publicBool !== "boolean") {
     return { error: "Recipe name and public selection are required", status: 401 }
   }
   
   try {
-      console.log("awaiting recipe ID")
+      // console.log("awaiting recipe ID")
       const newRecipeID = await getMaxRecipeByID();
-      console.log(newRecipeID)
+      // console.log(newRecipeID)
       const newRecipe = await addrecipe(newRecipeID, recipeName, workingUserID, publicBool);
-      console.log("worked recipe?")
+      // console.log("worked recipe?")
       
       return { success: "Recipe successfully created" }
   } catch (error) {
@@ -79,7 +79,7 @@ export default function Recipe() {
       const handleAddNewRecipe = async () => {
           // setRecipeInformationToEdit(null);
           // setIsFormVisible(true);
-          console.log("yippee")
+          // console.log("yippee")
       };
   
       useEffect(() => {
@@ -157,7 +157,9 @@ export default function Recipe() {
                             /> */}
                             <Button 
                             type="submit"
-                            color="primary">
+                            color="primary"
+                            onPress={onClose}
+                            >
                               Submit
                             </Button>
                           </Form>
