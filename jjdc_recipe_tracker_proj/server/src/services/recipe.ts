@@ -56,7 +56,6 @@ export async function getMaxRecipeID(): Promise<number> {
     // const queryName = RecipeID;//.toLowerCase();
     const sqlQuery = `SELECT MAX(RecipeID) + 1 AS maxID FROM BalanceBites.Recipes;`;
     const [rows] = await pool.query(sqlQuery);
-    // console.log(typeof rows[0]);
     const maxID = (rows as any)[0].maxID;
     console.log(maxID)
     return maxID as number;
@@ -74,7 +73,7 @@ export async function getAllFoodName(): Promise<string[]> {
 
 export async function addRecipe(NewRecipe: Recipe): Promise<void> {
     // console.log(NewRecipe)
-    const sqlQuery = `INSERT INTO BalanceBites.Recipes (RecipeID, Name, UserID, Public) VALUES ('${NewRecipe.RecipeID}', '${NewRecipe.Name}', '${NewRecipe.UserID}', '${NewRecipe.Public}');`;
+    const sqlQuery = `INSERT INTO BalanceBites.Recipes (RecipeID, Name, UserID, Public) VALUES (${NewRecipe.RecipeID}, '${NewRecipe.Name}', '${NewRecipe.UserID}', ${NewRecipe.Public});`;
     console.log("after new recipe")
     const result = await pool.query(sqlQuery);
     console.log(result)
@@ -82,7 +81,7 @@ export async function addRecipe(NewRecipe: Recipe): Promise<void> {
 
 export async function addIngredient(NewIngredient: Ingredients): Promise<void> {
     // console.log(NewRecipe)
-    const sqlQuery = `INSERT INTO BalanceBites.Ingredients (RecipeID, FoodName, Quantity) VALUES ('${NewIngredient.RecipeID}', '${NewIngredient.FoodName}', '${NewIngredient.Quantity}');`;
+    const sqlQuery = `INSERT INTO BalanceBites.Ingredients (RecipeID, FoodName, Quantity) VALUES (${NewIngredient.RecipeID}, '${NewIngredient.FoodName}', ${NewIngredient.Quantity});`;
     console.log("after new ingredient")
     const result = await pool.query(sqlQuery);
     console.log(result)
