@@ -1,7 +1,7 @@
 import pool from "./connection";
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user";
-import { Ingredients, Recipe, Nutritions } from "../models/recipe";
+import { Ingredients, Recipe, Nutritions, maxID } from "../models/recipe";
 
 // Before we add sql commands
 
@@ -55,9 +55,11 @@ export async function getMaxRecipeID(): Promise<number> {
     console.log("Getting the max recipeID")
     // const queryName = RecipeID;//.toLowerCase();
     const sqlQuery = `SELECT MAX(RecipeID) + 1 AS maxID FROM BalanceBites.Recipes;`;
-    const [maxID] = await pool.query(sqlQuery);
+    const [rows] = await pool.query(sqlQuery);
+    // console.log(typeof rows[0]);
+    const maxID = (rows as any)[0].maxID;
     console.log(maxID)
-    return maxID as unknown as number;
+    return maxID as number;
 };
 
 export async function getAllFoodName(): Promise<string[]> {
