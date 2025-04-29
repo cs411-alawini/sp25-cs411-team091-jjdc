@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, searchRecipes, addMealPlan, addMealPlanRecipes, getUserNutritionStats, addNutritionLog, getUserMealPlansByID, getMealPlansByID} from "../services/database";
+import { getAllUser, getUserByUserID, addUser, getUserByLogin, getUserMacros, searchRecipes, addMealPlan, addMealPlanRecipes, getUserNutritionStats, addNutritionLog, getUserMealPlansByID, getMealPlansByID, getRecipeInMealPlansByID} from "../services/database";
 import { User } from "../models/user";
 
 
@@ -173,6 +173,20 @@ router.get("/mealplan/:id", async (req: Request, res: Response) => {
       const mealplan = await getMealPlansByID(id);
       if (mealplan) {
         res.status(200).json(mealplan);
+      } else {
+        res.status(404).json({ message: `No meal plan found with ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching meal plan" });
+    }
+});
+
+router.get("/mealplan/recipe/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    try {
+      const recipe = await getRecipeInMealPlansByID(id);
+      if (recipe) {
+        res.status(200).json(recipe);
       } else {
         res.status(404).json({ message: `No meal plan found with ID ${id}` });
       }

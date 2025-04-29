@@ -126,6 +126,11 @@ export async function getMealPlansByID(mealplanId: number): Promise<any> {
     return rows;
 }
 
+export async function getRecipeInMealPlansByID(mealplanId: number): Promise<any> {
+    const [rows] = await pool.query(`SELECT Name FROM Recipes WHERE RecipeID IN (SELECT RecipeID FROM MealPlanRecipes WHERE MealPlanID = ${mealplanId});`);
+    return rows;
+}
+
 // export async function deletePokemonSpawnbyID(spawnID: number): Promise<void> {
 //     const sqlQuery = `DELETE FROM pokemon_spawn WHERE spawnID = ${spawnID};`;
 //     await pool.query(sqlQuery);

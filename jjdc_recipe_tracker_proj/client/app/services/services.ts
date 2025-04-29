@@ -163,3 +163,12 @@ export const getMealPlanByID = (id: number): Promise<MealPlan[]> => {
         return response.data;
       });
 };
+
+export const getRecipeByMealPlanID = (id: number): Promise<Recipe[]> => {
+  return httpClient
+      .get(`/api/balancebites/mealplan/recipe/${id}`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
