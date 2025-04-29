@@ -116,3 +116,12 @@ export const addrecipe = (recipeid: number, name: string, userid: string, public
   return httpClient.post('/api/recipe/addrecipe', NewRecipe).then((response) => response.data);
 }
 
+export const getMxRecipeByID = (): Promise<number> => {
+  return httpClient
+      .get(`/api/recipe/maxrecipe`)
+      .then((response) => {
+        console.log("API raw response:", response.data);
+        return response.data;
+      });
+};
+
