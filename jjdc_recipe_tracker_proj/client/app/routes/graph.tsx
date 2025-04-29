@@ -10,14 +10,28 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import axios from 'axios';
+import { getCurrentUserID } from '~/services/sessions.server';
+import { useLoaderData } from 'react-router';
+
+export async function loader({ request }: { request: Request }) {
+  const userID = await getCurrentUserID(request);
+  
+  return { userID }; // send it to the client safely
+}
+
 
 const ExampleGraph: React.FC = () => {
   const [data, setData] = useState([]);
+  const { userID } = useLoaderData() as { userID: string };
 
   useEffect(() => {
     const fetchUserMacros = async () => {
       try {
-        const response = await axios.get('http://localhost:3007/api/balancebites/macros');
+        const response = await axios.get('http://localhost:3007/api/balancebites/macros', {
+          params: {
+            UserID: userID
+          }
+        });
         const backendData = response.data;
 
         const chartData = backendData.map((item: any) => ({

@@ -70,8 +70,18 @@ function UserLoggedIn({ user }: { user: Omit<User, "Password"> }) {
         </Link>
       </NavbarItem>
       <NavbarItem>
-        <Link className="text-white" color="primary" href="/log"> 
+        <Link className="text-white" color="primary" href="/graph"> 
           Nutrition Tracker
+        </Link>
+      </NavbarItem>
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/nutritionLog"> 
+          Nutrition Log
+        </Link>
+      </NavbarItem>
+      <NavbarItem>
+        <Link className="text-white" color="primary" href="/searchmealplan"> 
+          Search Meal Plans
         </Link>
       </NavbarItem>
 
