@@ -128,7 +128,7 @@ export async function getMealPlansByID(mealplanId: number): Promise<any> {
 }
 
 export async function getRecipeInMealPlansByID(mealplanId: number): Promise<any> {
-    const [rows] = await pool.query(`SELECT Name FROM Recipes WHERE RecipeID IN (SELECT RecipeID FROM MealPlanRecipes WHERE MealPlanID = ${mealplanId});`);
+    const [rows] = await pool.query(`SELECT * FROM Recipes WHERE RecipeID IN (SELECT RecipeID FROM MealPlanRecipes WHERE MealPlanID = ${mealplanId});`);
     return rows;
 }
 

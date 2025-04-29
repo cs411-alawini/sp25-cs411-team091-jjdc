@@ -19,6 +19,9 @@ type Params = {
   };
   "/addMealPlan": {};
   "/mealplan": {};
+  "/searchmealplan/:MealPlanID": {
+    "MealPlanID": string;
+  };
   "/nutritionStats": {};
   "/nutritionLog": {};
 };
